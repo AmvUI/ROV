@@ -1,0 +1,9 @@
+<launch>
+	<node name="image_processing" pkg="gabut" output="screen" type="image_processing" />
+	<node name="rov_remote" pkg="gabut" output="screen" type="rov_remote" />
+	
+	<node respawn="true" pkg="joy" type="joy_node" name="turtle_joy" >
+		<param name="dev" type="string" value="/dev/input/js0" />
+		<param name="deadzone" value="0.12" />
+	</node>
+</launch>

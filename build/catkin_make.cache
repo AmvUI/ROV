@@ -1,0 +1,2 @@
+gabut
+-DCATKIN_DEVEL_PREFIX=/home/mfikih15/Documents/ROV/devel -DCMAKE_INSTALL_PREFIX=/home/mfikih15/Documents/ROV/install -G Unix Makefiles
