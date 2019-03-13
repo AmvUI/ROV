@@ -18,22 +18,22 @@ class mode {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
-      this.mode = null;
+      this.rc_number = null;
     }
     else {
-      if (initObj.hasOwnProperty('mode')) {
-        this.mode = initObj.mode
+      if (initObj.hasOwnProperty('rc_number')) {
+        this.rc_number = initObj.rc_number
       }
       else {
-        this.mode = 0;
+        this.rc_number = 0;
       }
     }
   }
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type mode
-    // Serialize message field [mode]
-    bufferOffset = _serializer.int16(obj.mode, buffer, bufferOffset);
+    // Serialize message field [rc_number]
+    bufferOffset = _serializer.int16(obj.rc_number, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -41,8 +41,8 @@ class mode {
     //deserializes a message object of type mode
     let len;
     let data = new mode(null);
-    // Deserialize message field [mode]
-    data.mode = _deserializer.int16(buffer, bufferOffset);
+    // Deserialize message field [rc_number]
+    data.rc_number = _deserializer.int16(buffer, bufferOffset);
     return data;
   }
 
@@ -57,13 +57,13 @@ class mode {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '7dcb05a3287517692aa8c4ee83b4e18b';
+    return '2244ae5f9aac7ce5c8daccbb71337be0';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    int16 mode
+    int16 rc_number
     
     `;
   }
@@ -74,11 +74,11 @@ class mode {
       msg = {};
     }
     const resolved = new mode(null);
-    if (msg.mode !== undefined) {
-      resolved.mode = msg.mode;
+    if (msg.rc_number !== undefined) {
+      resolved.rc_number = msg.rc_number;
     }
     else {
-      resolved.mode = 0
+      resolved.rc_number = 0
     }
 
     return resolved;

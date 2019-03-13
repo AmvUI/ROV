@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/mfikih15/Documents/ROV/devel/include/gabut/mode.h
+/home/mfikih15/Documents/ROV/devel/include/gabut/number_rc.h
 string
 -
 vector
@@ -31,8 +31,8 @@ iostream
 -
 stdio.h
 -
-gabut/mode.h
-/home/mfikih15/Documents/ROV/src/gabut/src/gabut/mode.h
+gabut/number_rc.h
+/home/mfikih15/Documents/ROV/src/gabut/src/gabut/number_rc.h
 
 /opt/ros/kinetic/include/ros/advertise_options.h
 ros/forwards.h

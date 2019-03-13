@@ -283,19 +283,6 @@ gtest_main/fast:
 .PHONY : gtest_main/fast
 
 #=============================================================================
-# Target rules for targets named manual_control
-
-# Build rule for target.
-manual_control: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 manual_control
-.PHONY : manual_control
-
-# fast build rule for target.
-manual_control/fast:
-	$(MAKE) -f gabut/CMakeFiles/manual_control.dir/build.make gabut/CMakeFiles/manual_control.dir/build
-.PHONY : manual_control/fast
-
-#=============================================================================
 # Target rules for targets named image_processing
 
 # Build rule for target.
@@ -543,6 +530,19 @@ roscpp_generate_messages_py/fast:
 .PHONY : roscpp_generate_messages_py/fast
 
 #=============================================================================
+# Target rules for targets named _gabut_generate_messages_check_deps_number_rc
+
+# Build rule for target.
+_gabut_generate_messages_check_deps_number_rc: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _gabut_generate_messages_check_deps_number_rc
+.PHONY : _gabut_generate_messages_check_deps_number_rc
+
+# fast build rule for target.
+_gabut_generate_messages_check_deps_number_rc/fast:
+	$(MAKE) -f gabut/CMakeFiles/_gabut_generate_messages_check_deps_number_rc.dir/build.make gabut/CMakeFiles/_gabut_generate_messages_check_deps_number_rc.dir/build
+.PHONY : _gabut_generate_messages_check_deps_number_rc/fast
+
+#=============================================================================
 # Target rules for targets named sensor_msgs_generate_messages_nodejs
 
 # Build rule for target.
@@ -593,6 +593,19 @@ rosgraph_msgs_generate_messages_cpp: cmake_check_build_system
 rosgraph_msgs_generate_messages_cpp/fast:
 	$(MAKE) -f gabut/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make gabut/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named manual_rov
+
+# Build rule for target.
+manual_rov: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 manual_rov
+.PHONY : manual_rov
+
+# fast build rule for target.
+manual_rov/fast:
+	$(MAKE) -f gabut/CMakeFiles/manual_rov.dir/build.make gabut/CMakeFiles/manual_rov.dir/build
+.PHONY : manual_rov/fast
 
 #=============================================================================
 # Target rules for targets named gabut_generate_messages_lisp
@@ -985,19 +998,6 @@ gabut_generate_messages/fast:
 .PHONY : gabut_generate_messages/fast
 
 #=============================================================================
-# Target rules for targets named _gabut_generate_messages_check_deps_mode
-
-# Build rule for target.
-_gabut_generate_messages_check_deps_mode: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _gabut_generate_messages_check_deps_mode
-.PHONY : _gabut_generate_messages_check_deps_mode
-
-# fast build rule for target.
-_gabut_generate_messages_check_deps_mode/fast:
-	$(MAKE) -f gabut/CMakeFiles/_gabut_generate_messages_check_deps_mode.dir/build.make gabut/CMakeFiles/_gabut_generate_messages_check_deps_mode.dir/build
-.PHONY : _gabut_generate_messages_check_deps_mode/fast
-
-#=============================================================================
 # Target rules for targets named gabut_generate_messages_cpp
 
 # Build rule for target.
@@ -1045,7 +1045,6 @@ help:
 	@echo "... gmock_main"
 	@echo "... gtest"
 	@echo "... gtest_main"
-	@echo "... manual_control"
 	@echo "... image_processing"
 	@echo "... video_rov"
 	@echo "... gabut_genpy"
@@ -1065,10 +1064,12 @@ help:
 	@echo "... geometry_msgs_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... roscpp_generate_messages_py"
+	@echo "... _gabut_generate_messages_check_deps_number_rc"
 	@echo "... sensor_msgs_generate_messages_nodejs"
 	@echo "... geometry_msgs_generate_messages_cpp"
 	@echo "... mavros_msgs_generate_messages_cpp"
 	@echo "... rosgraph_msgs_generate_messages_cpp"
+	@echo "... manual_rov"
 	@echo "... gabut_generate_messages_lisp"
 	@echo "... sensor_msgs_generate_messages_eus"
 	@echo "... std_msgs_generate_messages_cpp"
@@ -1099,7 +1100,6 @@ help:
 	@echo "... uuid_msgs_generate_messages_py"
 	@echo "... geometry_msgs_generate_messages_nodejs"
 	@echo "... gabut_generate_messages"
-	@echo "... _gabut_generate_messages_check_deps_mode"
 	@echo "... gabut_generate_messages_cpp"
 	@echo "... gabut_generate_messages_eus"
 .PHONY : help

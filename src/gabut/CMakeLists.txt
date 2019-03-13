@@ -53,9 +53,9 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x")
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
- add_message_files(
-   FILES
-   mode.msg
+add_message_files(
+	FILES
+	number_rc.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -182,8 +182,8 @@ target_link_libraries(rov_remote
 ${catkin_LIBRARIES}
 )
 
-add_executable(manual_control src/manual_control.cpp )
-target_link_libraries(manual_control
+add_executable(manual_rov src/manual_rov.cpp )
+target_link_libraries(manual_rov
 ${catkin_LIBRARIES}
 )
 #############

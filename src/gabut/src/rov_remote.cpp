@@ -2,7 +2,7 @@
 #include <sensor_msgs/Joy.h>
 #include <iostream>
 #include <stdio.h>
-#include "gabut/mode.h"
+#include "gabut/number_rc.h"
 
 using namespace std;
 
@@ -16,14 +16,14 @@ int auto_mode, manual_mode;
 
 int mode_number=2;
 
-gabut::mode mode; 
+gabut::number_rc number; 
 
 int main(int argc, char** argv){
 	ros::init(argc, argv, "remoteServer");
 	ros::NodeHandle nh;
 	
-	ros::Publisher  pub_rc_flag 	= nh.advertise<gabut::mode>("/mate/rov/mode", 1);
-	ros::Subscriber joy_sub 		= nh.subscribe<sensor_msgs::Joy>("joy", 8, &joyCallback);
+	ros::Publisher pub_rc_flag 	= nh.advertise<gabut::number_rc>("/mate/rov/number", 1,true);
+	ros::Subscriber joy_sub 	= nh.subscribe<sensor_msgs::Joy>("joy", 8, &joyCallback);
 	
 	while( ros::ok() ){
 		ros::spinOnce();
@@ -33,8 +33,9 @@ int main(int argc, char** argv){
 		else if(manual_mode ==1 && mode_number==1){
 			mode_number=2;
 		}
-		mode.mode=mode_number;
-		pub_rc_flag.publish(mode);
+		number.rc_number=mode_number;
+		pub_rc_flag.publish(number);
+		//cout<<mode_number<<endl;
 	}
 }
  

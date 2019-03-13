@@ -4,6 +4,9 @@
 gabut/CMakeFiles/manual_control.dir/src/manual_control.cpp.o: /home/mfikih15/Documents/ROV/devel/include/gabut/mode.h
 gabut/CMakeFiles/manual_control.dir/src/manual_control.cpp.o: /home/mfikih15/Documents/ROV/src/gabut/src/manual_control.cpp
 gabut/CMakeFiles/manual_control.dir/src/manual_control.cpp.o: /opt/ros/kinetic/include/mavros_msgs/OverrideRCIn.h
+gabut/CMakeFiles/manual_control.dir/src/manual_control.cpp.o: /opt/ros/kinetic/include/mavros_msgs/SetMode.h
+gabut/CMakeFiles/manual_control.dir/src/manual_control.cpp.o: /opt/ros/kinetic/include/mavros_msgs/SetModeRequest.h
+gabut/CMakeFiles/manual_control.dir/src/manual_control.cpp.o: /opt/ros/kinetic/include/mavros_msgs/SetModeResponse.h
 gabut/CMakeFiles/manual_control.dir/src/manual_control.cpp.o: /opt/ros/kinetic/include/ros/advertise_options.h
 gabut/CMakeFiles/manual_control.dir/src/manual_control.cpp.o: /opt/ros/kinetic/include/ros/advertise_service_options.h
 gabut/CMakeFiles/manual_control.dir/src/manual_control.cpp.o: /opt/ros/kinetic/include/ros/assert.h

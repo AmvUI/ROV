@@ -14,50 +14,50 @@
 
 (defclass gabut::mode
   :super ros::object
-  :slots (_mode ))
+  :slots (_rc_number ))
 
 (defmethod gabut::mode
   (:init
    (&key
-    ((:mode __mode) 0)
+    ((:rc_number __rc_number) 0)
     )
    (send-super :init)
-   (setq _mode (round __mode))
+   (setq _rc_number (round __rc_number))
    self)
-  (:mode
-   (&optional __mode)
-   (if __mode (setq _mode __mode)) _mode)
+  (:rc_number
+   (&optional __rc_number)
+   (if __rc_number (setq _rc_number __rc_number)) _rc_number)
   (:serialization-length
    ()
    (+
-    ;; int16 _mode
+    ;; int16 _rc_number
     2
     ))
   (:serialize
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; int16 _mode
-       (write-word _mode s)
+     ;; int16 _rc_number
+       (write-word _rc_number s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; int16 _mode
-     (setq _mode (sys::peek buf ptr- :short)) (incf ptr- 2)
+   ;; int16 _rc_number
+     (setq _rc_number (sys::peek buf ptr- :short)) (incf ptr- 2)
    ;;
    self)
   )
 
-(setf (get gabut::mode :md5sum-) "7dcb05a3287517692aa8c4ee83b4e18b")
+(setf (get gabut::mode :md5sum-) "2244ae5f9aac7ce5c8daccbb71337be0")
 (setf (get gabut::mode :datatype-) "gabut/mode")
 (setf (get gabut::mode :definition-)
-      "int16 mode
+      "int16 rc_number
 
 ")
 
 
 
-(provide :gabut/mode "7dcb05a3287517692aa8c4ee83b4e18b")
+(provide :gabut/mode "2244ae5f9aac7ce5c8daccbb71337be0")
 
 

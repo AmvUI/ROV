@@ -7,12 +7,12 @@ import struct
 
 
 class mode(genpy.Message):
-  _md5sum = "7dcb05a3287517692aa8c4ee83b4e18b"
+  _md5sum = "2244ae5f9aac7ce5c8daccbb71337be0"
   _type = "gabut/mode"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """int16 mode
+  _full_text = """int16 rc_number
 """
-  __slots__ = ['mode']
+  __slots__ = ['rc_number']
   _slot_types = ['int16']
 
   def __init__(self, *args, **kwds):
@@ -23,7 +23,7 @@ class mode(genpy.Message):
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       mode
+       rc_number
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -32,10 +32,10 @@ class mode(genpy.Message):
     if args or kwds:
       super(mode, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
-      if self.mode is None:
-        self.mode = 0
+      if self.rc_number is None:
+        self.rc_number = 0
     else:
-      self.mode = 0
+      self.rc_number = 0
 
   def _get_types(self):
     """
@@ -49,7 +49,7 @@ class mode(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      buff.write(_get_struct_h().pack(self.mode))
+      buff.write(_get_struct_h().pack(self.rc_number))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -62,7 +62,7 @@ class mode(genpy.Message):
       end = 0
       start = end
       end += 2
-      (self.mode,) = _get_struct_h().unpack(str[start:end])
+      (self.rc_number,) = _get_struct_h().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -75,7 +75,7 @@ class mode(genpy.Message):
     :param numpy: numpy python module
     """
     try:
-      buff.write(_get_struct_h().pack(self.mode))
+      buff.write(_get_struct_h().pack(self.rc_number))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -89,7 +89,7 @@ class mode(genpy.Message):
       end = 0
       start = end
       end += 2
-      (self.mode,) = _get_struct_h().unpack(str[start:end])
+      (self.rc_number,) = _get_struct_h().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill

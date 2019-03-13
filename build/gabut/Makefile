@@ -166,21 +166,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-gabut/CMakeFiles/manual_control.dir/rule:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/manual_control.dir/rule
-.PHONY : gabut/CMakeFiles/manual_control.dir/rule
-
-# Convenience name for target.
-manual_control: gabut/CMakeFiles/manual_control.dir/rule
-
-.PHONY : manual_control
-
-# fast build rule for target.
-manual_control/fast:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/manual_control.dir/build.make gabut/CMakeFiles/manual_control.dir/build
-.PHONY : manual_control/fast
-
-# Convenience name for target.
 gabut/CMakeFiles/image_processing.dir/rule:
 	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/image_processing.dir/rule
 .PHONY : gabut/CMakeFiles/image_processing.dir/rule
@@ -466,6 +451,21 @@ roscpp_generate_messages_py/fast:
 .PHONY : roscpp_generate_messages_py/fast
 
 # Convenience name for target.
+gabut/CMakeFiles/_gabut_generate_messages_check_deps_number_rc.dir/rule:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/_gabut_generate_messages_check_deps_number_rc.dir/rule
+.PHONY : gabut/CMakeFiles/_gabut_generate_messages_check_deps_number_rc.dir/rule
+
+# Convenience name for target.
+_gabut_generate_messages_check_deps_number_rc: gabut/CMakeFiles/_gabut_generate_messages_check_deps_number_rc.dir/rule
+
+.PHONY : _gabut_generate_messages_check_deps_number_rc
+
+# fast build rule for target.
+_gabut_generate_messages_check_deps_number_rc/fast:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/_gabut_generate_messages_check_deps_number_rc.dir/build.make gabut/CMakeFiles/_gabut_generate_messages_check_deps_number_rc.dir/build
+.PHONY : _gabut_generate_messages_check_deps_number_rc/fast
+
+# Convenience name for target.
 gabut/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule:
 	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
 .PHONY : gabut/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
@@ -524,6 +524,21 @@ rosgraph_msgs_generate_messages_cpp: gabut/CMakeFiles/rosgraph_msgs_generate_mes
 rosgraph_msgs_generate_messages_cpp/fast:
 	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make gabut/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+gabut/CMakeFiles/manual_rov.dir/rule:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/manual_rov.dir/rule
+.PHONY : gabut/CMakeFiles/manual_rov.dir/rule
+
+# Convenience name for target.
+manual_rov: gabut/CMakeFiles/manual_rov.dir/rule
+
+.PHONY : manual_rov
+
+# fast build rule for target.
+manual_rov/fast:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/manual_rov.dir/build.make gabut/CMakeFiles/manual_rov.dir/build
+.PHONY : manual_rov/fast
 
 # Convenience name for target.
 gabut/CMakeFiles/gabut_generate_messages_lisp.dir/rule:
@@ -976,21 +991,6 @@ gabut_generate_messages/fast:
 .PHONY : gabut_generate_messages/fast
 
 # Convenience name for target.
-gabut/CMakeFiles/_gabut_generate_messages_check_deps_mode.dir/rule:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/_gabut_generate_messages_check_deps_mode.dir/rule
-.PHONY : gabut/CMakeFiles/_gabut_generate_messages_check_deps_mode.dir/rule
-
-# Convenience name for target.
-_gabut_generate_messages_check_deps_mode: gabut/CMakeFiles/_gabut_generate_messages_check_deps_mode.dir/rule
-
-.PHONY : _gabut_generate_messages_check_deps_mode
-
-# fast build rule for target.
-_gabut_generate_messages_check_deps_mode/fast:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/_gabut_generate_messages_check_deps_mode.dir/build.make gabut/CMakeFiles/_gabut_generate_messages_check_deps_mode.dir/build
-.PHONY : _gabut_generate_messages_check_deps_mode/fast
-
-# Convenience name for target.
 gabut/CMakeFiles/gabut_generate_messages_cpp.dir/rule:
 	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/gabut_generate_messages_cpp.dir/rule
 .PHONY : gabut/CMakeFiles/gabut_generate_messages_cpp.dir/rule
@@ -1047,32 +1047,32 @@ src/image_processing.cpp.s:
 	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/image_processing.dir/build.make gabut/CMakeFiles/image_processing.dir/src/image_processing.cpp.s
 .PHONY : src/image_processing.cpp.s
 
-src/manual_control.o: src/manual_control.cpp.o
+src/manual_rov.o: src/manual_rov.cpp.o
 
-.PHONY : src/manual_control.o
+.PHONY : src/manual_rov.o
 
 # target to build an object file
-src/manual_control.cpp.o:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/manual_control.dir/build.make gabut/CMakeFiles/manual_control.dir/src/manual_control.cpp.o
-.PHONY : src/manual_control.cpp.o
+src/manual_rov.cpp.o:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/manual_rov.dir/build.make gabut/CMakeFiles/manual_rov.dir/src/manual_rov.cpp.o
+.PHONY : src/manual_rov.cpp.o
 
-src/manual_control.i: src/manual_control.cpp.i
+src/manual_rov.i: src/manual_rov.cpp.i
 
-.PHONY : src/manual_control.i
+.PHONY : src/manual_rov.i
 
 # target to preprocess a source file
-src/manual_control.cpp.i:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/manual_control.dir/build.make gabut/CMakeFiles/manual_control.dir/src/manual_control.cpp.i
-.PHONY : src/manual_control.cpp.i
+src/manual_rov.cpp.i:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/manual_rov.dir/build.make gabut/CMakeFiles/manual_rov.dir/src/manual_rov.cpp.i
+.PHONY : src/manual_rov.cpp.i
 
-src/manual_control.s: src/manual_control.cpp.s
+src/manual_rov.s: src/manual_rov.cpp.s
 
-.PHONY : src/manual_control.s
+.PHONY : src/manual_rov.s
 
 # target to generate assembly for a file
-src/manual_control.cpp.s:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/manual_control.dir/build.make gabut/CMakeFiles/manual_control.dir/src/manual_control.cpp.s
-.PHONY : src/manual_control.cpp.s
+src/manual_rov.cpp.s:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/manual_rov.dir/build.make gabut/CMakeFiles/manual_rov.dir/src/manual_rov.cpp.s
+.PHONY : src/manual_rov.cpp.s
 
 src/rov_remote.o: src/rov_remote.cpp.o
 
@@ -1165,7 +1165,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... install/local"
 	@echo "... install/strip"
-	@echo "... manual_control"
 	@echo "... image_processing"
 	@echo "... video_rov"
 	@echo "... gabut_genpy"
@@ -1187,11 +1186,13 @@ help:
 	@echo "... geometry_msgs_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... roscpp_generate_messages_py"
+	@echo "... _gabut_generate_messages_check_deps_number_rc"
 	@echo "... sensor_msgs_generate_messages_nodejs"
 	@echo "... test"
 	@echo "... geometry_msgs_generate_messages_cpp"
 	@echo "... mavros_msgs_generate_messages_cpp"
 	@echo "... rosgraph_msgs_generate_messages_cpp"
+	@echo "... manual_rov"
 	@echo "... gabut_generate_messages_lisp"
 	@echo "... sensor_msgs_generate_messages_eus"
 	@echo "... std_msgs_generate_messages_cpp"
@@ -1222,15 +1223,14 @@ help:
 	@echo "... uuid_msgs_generate_messages_py"
 	@echo "... geometry_msgs_generate_messages_nodejs"
 	@echo "... gabut_generate_messages"
-	@echo "... _gabut_generate_messages_check_deps_mode"
 	@echo "... gabut_generate_messages_cpp"
 	@echo "... gabut_generate_messages_eus"
 	@echo "... src/image_processing.o"
 	@echo "... src/image_processing.i"
 	@echo "... src/image_processing.s"
-	@echo "... src/manual_control.o"
-	@echo "... src/manual_control.i"
-	@echo "... src/manual_control.s"
+	@echo "... src/manual_rov.o"
+	@echo "... src/manual_rov.i"
+	@echo "... src/manual_rov.s"
 	@echo "... src/rov_remote.o"
 	@echo "... src/rov_remote.i"
 	@echo "... src/rov_remote.s"

@@ -1,8 +1,8 @@
 
 "use strict";
 
-let mode = require('./mode.js');
+let number_rc = require('./number_rc.js');
 
 module.exports = {
-  mode: mode,
+  number_rc: number_rc,
 };

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/gabut_generate_messages_eus"
-  "/home/mfikih15/Documents/ROV/devel/share/roseus/ros/gabut/msg/mode.l"
+  "/home/mfikih15/Documents/ROV/devel/share/roseus/ros/gabut/msg/number_rc.l"
   "/home/mfikih15/Documents/ROV/devel/share/roseus/ros/gabut/manifest.l"
 )
 

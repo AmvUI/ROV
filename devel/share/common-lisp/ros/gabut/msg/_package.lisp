@@ -1,7 +1,7 @@
 (cl:defpackage gabut-msg
   (:use )
   (:export
-   "<MODE>"
-   "MODE"
+   "<NUMBER_RC>"
+   "NUMBER_RC"
   ))
 

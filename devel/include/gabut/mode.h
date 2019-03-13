@@ -24,17 +24,17 @@ struct mode_
   typedef mode_<ContainerAllocator> Type;
 
   mode_()
-    : mode(0)  {
+    : rc_number(0)  {
     }
   mode_(const ContainerAllocator& _alloc)
-    : mode(0)  {
+    : rc_number(0)  {
   (void)_alloc;
     }
 
 
 
-   typedef int16_t _mode_type;
-  _mode_type mode;
+   typedef int16_t _rc_number_type;
+  _rc_number_type rc_number;
 
 
 
@@ -114,12 +114,12 @@ struct MD5Sum< ::gabut::mode_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "7dcb05a3287517692aa8c4ee83b4e18b";
+    return "2244ae5f9aac7ce5c8daccbb71337be0";
   }
 
   static const char* value(const ::gabut::mode_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x7dcb05a328751769ULL;
-  static const uint64_t static_value2 = 0x2aa8c4ee83b4e18bULL;
+  static const uint64_t static_value1 = 0x2244ae5f9aac7ce5ULL;
+  static const uint64_t static_value2 = 0xc8daccbb71337be0ULL;
 };
 
 template<class ContainerAllocator>
@@ -138,7 +138,7 @@ struct Definition< ::gabut::mode_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "int16 mode\n\
+    return "int16 rc_number\n\
 ";
   }
 
@@ -157,7 +157,7 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.mode);
+      stream.next(m.rc_number);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -176,8 +176,8 @@ struct Printer< ::gabut::mode_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::gabut::mode_<ContainerAllocator>& v)
   {
-    s << indent << "mode: ";
-    Printer<int16_t>::stream(s, indent + "  ", v.mode);
+    s << indent << "rc_number: ";
+    Printer<int16_t>::stream(s, indent + "  ", v.rc_number);
   }
 };
 

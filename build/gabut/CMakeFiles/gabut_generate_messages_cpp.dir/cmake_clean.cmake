@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/gabut_generate_messages_cpp"
-  "/home/mfikih15/Documents/ROV/devel/include/gabut/mode.h"
+  "/home/mfikih15/Documents/ROV/devel/include/gabut/number_rc.h"
 )
 
 # Per-language clean rules from dependency scanning.
