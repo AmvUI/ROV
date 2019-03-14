@@ -1,3 +1,4 @@
+#include "../include/gabut/hoho.hpp"
 #include <ros/ros.h>
 #include <image_transport/image_transport.h>
 #include <opencv2/highgui/highgui.hpp>
@@ -17,7 +18,7 @@ int main(int argc, char** argv)
 	
 	ROS_WARN("NC : image_front.cpp active");
 	
-	VideoCapture cap(1); 
+	VideoCapture cap(camera_mini); 
 	if(!cap.isOpened()){
 		ROS_ERROR ("Error opening camera.");	  
 		return 1;

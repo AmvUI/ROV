@@ -1,5 +1,5 @@
 <launch>
 	<node name="video_rov" pkg="gabut" output="screen" type="video_rov" />
 	<node name="video_mini" pkg="gabut" output="screen" type="video_mini" />
-	<node name="manual_rov" pkg="gabut" output="screen" type="manual_rov" />
+	<node name="controller" pkg="gabut" output="screen" type="controller" />
 </launch>

@@ -1,3 +1,4 @@
+#include "../include/gabut/hoho.hpp"
 #include "ros/ros.h"
 #include "mavros_msgs/OverrideRCIn.h"
 #include "mavros_msgs/SetMode.h"
@@ -7,34 +8,6 @@
 #include "gabut/number_rc.h"
 
 using namespace std;
-
-#define STEERING_PIN 		0
-#define THROTTLE_PIN 		2
-#define MOTOR1 				1
-#define MOTOR2  			3
-#define MOTOR3				4
-#define SERVO1				5
-#define SERVO2				6
-
-#define maxStabil 		1720
-#define maxMotor 		1720
-#define maxSteering 	1720
-#define maxThrottle 	1720
-
-
-#define minStabil 		1120
-#define minMotor		1120
-#define minSteering 	1120
-#define minThrottle 	1120
-
-#define middleStabil  	1520
-#define middleMotor  	1520
-#define middleSteering  1520
-#define middleThrottle 	1520
-
-float pwmServo =	1500;
-float maxServo =	1900;
-float minServo =	1100;
 
 int a, b, c, d, e, f;
 int g, h, i, j, k, l, m, n, o, p, q;
@@ -52,13 +25,15 @@ void control_cb (const gabut::number_rc& msg);
 mavros_msgs::OverrideRCIn rovRcIn;
 mavros_msgs::SetMode flight;
 	
+ros::Publisher pub_override_rc;
+
 void joyCallback(const sensor_msgs::Joy::ConstPtr& joy);
 
 int main(int argc, char** argv){
 	ros::init(argc, argv, "subPixhawk");
 	ros::NodeHandle nh;
 	
-	ros::Publisher pub_override_rc 	= nh.advertise<mavros_msgs::OverrideRCIn>("/mavros/rc/override", 8);
+	pub_override_rc 	= nh.advertise<mavros_msgs::OverrideRCIn>("/mavros/rc/override", 10);
 	ros::Subscriber joy_sub 		= nh.subscribe<sensor_msgs::Joy>("joy", 8, &joyCallback);
 	ros::Subscriber sub_pid_status 	= nh.subscribe("/mate/rov/number", 1, &control_cb);
 	ros::ServiceClient client 		= nh.serviceClient<mavros_msgs::SetMode>("/mavros/set_mode");
@@ -77,63 +52,7 @@ int main(int argc, char** argv){
 		
 	while( ros::ok() ){	
 		ros::spinOnce();
-		while(mode==2){	
-			ros::spinOnce();
-
-			for(int i=0; i < 8; i++) rovRcIn.channels[i] = 0;	//Releases all Channels First
-		
-			//up 
-			if (sink > 0){
-				rovRcIn.channels[MOTOR1] = minStabil;
-				rovRcIn.channels[MOTOR2] = minMotor;
-				rovRcIn.channels[MOTOR3] = minMotor;
-			}
-			//down
-			else if (sink < 0){
-				rovRcIn.channels[MOTOR1] = maxStabil;
-				rovRcIn.channels[MOTOR2] = maxMotor;
-				rovRcIn.channels[MOTOR3] = maxMotor;
-			}
-			else {
-				rovRcIn.channels[MOTOR1] = middleStabil;
-				rovRcIn.channels[MOTOR2] = middleMotor;
-				rovRcIn.channels[MOTOR3] = middleMotor;		
-			}
-	
-			//steering
-			if (steering > 0){rovRcIn.channels[STEERING_PIN] = maxSteering;}//right
-			else if (steering < 0){rovRcIn.channels[STEERING_PIN] = minSteering;}//left
-			else {rovRcIn.channels[STEERING_PIN] = middleSteering;}
-	
-			//throttle
-			if (throttle > 0){rovRcIn.channels[THROTTLE_PIN] = maxThrottle;}
-			else if (throttle < 0){rovRcIn.channels[THROTTLE_PIN] = minThrottle;}
-			else {rovRcIn.channels[THROTTLE_PIN] = middleThrottle;}
-		
-			sleep(0.2);
-		
-			if (grip_high > 0){
-				//rovRcIn.channels[SERVO] = pwmServo + 100;
-				pwmServo = pwmServo + 0.1;
-				tempPwm = pwmServo;
-				if(pwmServo > maxServo){pwmServo = maxServo;}
-			}
-			else if(grip_low > 0){ 
-				//rovRcIn.channels[SERVO] = pwmServo - 100;
-				pwmServo = pwmServo - 0.1;
-				tempPwm = pwmServo;
-				if(pwmServo < minServo){pwmServo = minServo;}
-			}
-			else{
-				//rovRcIn.channels[SERVO] = pwmServo + 0;
-				pwmServo = pwmServo + 0;
-			}
-		
-			rovRcIn.channels[SERVO1] = pwmServo;
-			rovRcIn.channels[SERVO2] = pwmServo;
-	
-			pub_override_rc.publish(rovRcIn);	
-		}
+		sleep(0.2);
 	}
 }
 
@@ -158,7 +77,63 @@ void joyCallback(const sensor_msgs::Joy::ConstPtr& joy){
 	steering 	= joy->axes[3];
 	sink 		= joy->axes[2];
 	grip_high 	= joy->buttons[5];
-	grip_low 	= joy->buttons[7];	
+	grip_low 	= joy->buttons[7];
+	
+	//checkController();
+	
+	if(mode==2){	
+		for(int i=0; i < 8; i++) rovRcIn.channels[i] = 0;	//Releases all Channels First
+		
+		//up 
+		if (sink > 0){
+			rovRcIn.channels[MOTOR1] = minStabil;
+			rovRcIn.channels[MOTOR2] = minMotor;
+			rovRcIn.channels[MOTOR3] = minMotor;
+		}
+		//down
+		else if (sink < 0){
+			rovRcIn.channels[MOTOR1] = maxStabil;
+			rovRcIn.channels[MOTOR2] = maxMotor;
+			rovRcIn.channels[MOTOR3] = maxMotor;
+		}
+		else {
+			rovRcIn.channels[MOTOR1] = middleStabil;
+			rovRcIn.channels[MOTOR2] = middleMotor;
+			rovRcIn.channels[MOTOR3] = middleMotor;		
+		}
+	
+		//steering
+		if (steering > 0){rovRcIn.channels[STEERING_PIN] = maxSteering;}//right
+		else if (steering < 0){rovRcIn.channels[STEERING_PIN] = minSteering;}//left
+		else {rovRcIn.channels[STEERING_PIN] = middleSteering;}
+	
+		//throttle
+		if (throttle > 0){rovRcIn.channels[THROTTLE_PIN] = maxThrottle;}
+		else if (throttle < 0){rovRcIn.channels[THROTTLE_PIN] = minThrottle;}
+		else {rovRcIn.channels[THROTTLE_PIN] = middleThrottle;}
+		
+		
+		if (grip_high > 0){
+			//rovRcIn.channels[SERVO] = pwmServo + 100;
+			pwmServo = pwmServo + change_servo;
+			tempPwm = pwmServo;
+			if(pwmServo > maxServo){pwmServo = maxServo;}
+		}
+		else if(grip_low > 0){ 
+			//rovRcIn.channels[SERVO] = pwmServo - 100;
+			pwmServo = pwmServo - change_servo;
+			tempPwm = pwmServo;
+			if(pwmServo < minServo){pwmServo = minServo;}
+		}
+		else{
+			//rovRcIn.channels[SERVO] = pwmServo + 0;
+			pwmServo = pwmServo + 0;
+		}
+		
+		rovRcIn.channels[SERVO1] = pwmServo;
+		rovRcIn.channels[SERVO2] = pwmServo;
+		pub_override_rc.publish(rovRcIn);		
+	}	
 }
 
 
@@ -174,4 +149,3 @@ void checkController(){
 void control_cb (const gabut::number_rc& msg){
 	mode=msg.rc_number;
 }
-

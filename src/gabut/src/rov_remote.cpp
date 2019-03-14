@@ -1,3 +1,4 @@
+#include "../include/gabut/hoho.hpp"
 #include <ros/ros.h>
 #include <sensor_msgs/Joy.h>
 #include <iostream>
@@ -14,8 +15,6 @@ int g, h, i, j, k, l, m, n;
 
 int auto_mode, manual_mode; 
 
-int mode_number=2;
-
 gabut::number_rc number; 
 
 int main(int argc, char** argv){
@@ -27,11 +26,11 @@ int main(int argc, char** argv){
 	
 	while( ros::ok() ){
 		ros::spinOnce();
-		if(auto_mode ==1 && mode_number ==2){
-			mode_number=1;
+		if(auto_mode ==1 && mode_number ==manual_number){
+			mode_number = auto_number;
 		}
-		else if(manual_mode ==1 && mode_number==1){
-			mode_number=2;
+		else if(manual_mode ==1 && mode_number==auto_number){
+			mode_number = manual_number;
 		}
 		number.rc_number=mode_number;
 		pub_rc_flag.publish(number);

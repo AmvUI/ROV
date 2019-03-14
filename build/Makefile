@@ -595,19 +595,6 @@ rosgraph_msgs_generate_messages_cpp/fast:
 .PHONY : rosgraph_msgs_generate_messages_cpp/fast
 
 #=============================================================================
-# Target rules for targets named manual_rov
-
-# Build rule for target.
-manual_rov: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 manual_rov
-.PHONY : manual_rov
-
-# fast build rule for target.
-manual_rov/fast:
-	$(MAKE) -f gabut/CMakeFiles/manual_rov.dir/build.make gabut/CMakeFiles/manual_rov.dir/build
-.PHONY : manual_rov/fast
-
-#=============================================================================
 # Target rules for targets named gabut_generate_messages_lisp
 
 # Build rule for target.
@@ -749,6 +736,19 @@ geometry_msgs_generate_messages_eus: cmake_check_build_system
 geometry_msgs_generate_messages_eus/fast:
 	$(MAKE) -f gabut/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make gabut/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build
 .PHONY : geometry_msgs_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named controller
+
+# Build rule for target.
+controller: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 controller
+.PHONY : controller
+
+# fast build rule for target.
+controller/fast:
+	$(MAKE) -f gabut/CMakeFiles/controller.dir/build.make gabut/CMakeFiles/controller.dir/build
+.PHONY : controller/fast
 
 #=============================================================================
 # Target rules for targets named std_msgs_generate_messages_py
@@ -1069,7 +1069,6 @@ help:
 	@echo "... geometry_msgs_generate_messages_cpp"
 	@echo "... mavros_msgs_generate_messages_cpp"
 	@echo "... rosgraph_msgs_generate_messages_cpp"
-	@echo "... manual_rov"
 	@echo "... gabut_generate_messages_lisp"
 	@echo "... sensor_msgs_generate_messages_eus"
 	@echo "... std_msgs_generate_messages_cpp"
@@ -1081,6 +1080,7 @@ help:
 	@echo "... geometry_msgs_generate_messages_py"
 	@echo "... roscpp_generate_messages_cpp"
 	@echo "... geometry_msgs_generate_messages_eus"
+	@echo "... controller"
 	@echo "... std_msgs_generate_messages_py"
 	@echo "... uuid_msgs_generate_messages_nodejs"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"

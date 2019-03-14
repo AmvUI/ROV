@@ -182,8 +182,13 @@ target_link_libraries(rov_remote
 ${catkin_LIBRARIES}
 )
 
-add_executable(manual_rov src/manual_rov.cpp )
-target_link_libraries(manual_rov
+add_executable(controller src/controller.cpp )
+target_link_libraries(controller
+${catkin_LIBRARIES}
+)
+
+add_executable(debug_makara src/debug_makara.cpp )
+target_link_libraries(debug_makara
 ${catkin_LIBRARIES}
 )
 #############

@@ -246,7 +246,7 @@ gtest/preinstall: gtest/gtest/preinstall
 gtest/CMakeFiles/gmock.dir/all:
 	$(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/depend
 	$(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=8,9,10 "Built target gmock"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=10,11,12 "Built target gmock"
 .PHONY : gtest/CMakeFiles/gmock.dir/all
 
 # Build rule for subdir invocation for target.
@@ -278,7 +278,7 @@ clean: gtest/CMakeFiles/gmock.dir/clean
 gtest/CMakeFiles/gmock_main.dir/all:
 	$(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/depend
 	$(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=11,12,13,14 "Built target gmock_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=13,14,15,16 "Built target gmock_main"
 .PHONY : gtest/CMakeFiles/gmock_main.dir/all
 
 # Build rule for subdir invocation for target.
@@ -329,7 +329,7 @@ gtest/gtest/preinstall:
 gtest/gtest/CMakeFiles/gtest.dir/all:
 	$(MAKE) -f gtest/gtest/CMakeFiles/gtest.dir/build.make gtest/gtest/CMakeFiles/gtest.dir/depend
 	$(MAKE) -f gtest/gtest/CMakeFiles/gtest.dir/build.make gtest/gtest/CMakeFiles/gtest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=15,16 "Built target gtest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=17,18 "Built target gtest"
 .PHONY : gtest/gtest/CMakeFiles/gtest.dir/all
 
 # Build rule for subdir invocation for target.
@@ -361,7 +361,7 @@ clean: gtest/gtest/CMakeFiles/gtest.dir/clean
 gtest/gtest/CMakeFiles/gtest_main.dir/all: gtest/gtest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/gtest/CMakeFiles/gtest_main.dir/build.make gtest/gtest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) -f gtest/gtest/CMakeFiles/gtest_main.dir/build.make gtest/gtest/CMakeFiles/gtest_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=17,18 "Built target gtest_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=19,20 "Built target gtest_main"
 .PHONY : gtest/gtest/CMakeFiles/gtest_main.dir/all
 
 # Build rule for subdir invocation for target.
@@ -393,7 +393,7 @@ clean: gtest/gtest/CMakeFiles/gtest_main.dir/clean
 gabut/all: gabut/CMakeFiles/image_processing.dir/all
 gabut/all: gabut/CMakeFiles/video_rov.dir/all
 gabut/all: gabut/CMakeFiles/rov_remote.dir/all
-gabut/all: gabut/CMakeFiles/manual_rov.dir/all
+gabut/all: gabut/CMakeFiles/controller.dir/all
 gabut/all: gabut/CMakeFiles/video_mini.dir/all
 gabut/all: gabut/CMakeFiles/gabut_generate_messages.dir/all
 
@@ -424,7 +424,6 @@ gabut/clean: gabut/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/clean
 gabut/clean: gabut/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/clean
 gabut/clean: gabut/CMakeFiles/mavros_msgs_generate_messages_cpp.dir/clean
 gabut/clean: gabut/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/clean
-gabut/clean: gabut/CMakeFiles/manual_rov.dir/clean
 gabut/clean: gabut/CMakeFiles/gabut_generate_messages_lisp.dir/clean
 gabut/clean: gabut/CMakeFiles/sensor_msgs_generate_messages_eus.dir/clean
 gabut/clean: gabut/CMakeFiles/std_msgs_generate_messages_cpp.dir/clean
@@ -436,6 +435,7 @@ gabut/clean: gabut/CMakeFiles/std_msgs_generate_messages_nodejs.dir/clean
 gabut/clean: gabut/CMakeFiles/geometry_msgs_generate_messages_py.dir/clean
 gabut/clean: gabut/CMakeFiles/roscpp_generate_messages_cpp.dir/clean
 gabut/clean: gabut/CMakeFiles/geometry_msgs_generate_messages_eus.dir/clean
+gabut/clean: gabut/CMakeFiles/controller.dir/clean
 gabut/clean: gabut/CMakeFiles/std_msgs_generate_messages_py.dir/clean
 gabut/clean: gabut/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/clean
 gabut/clean: gabut/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/clean
@@ -472,7 +472,7 @@ gabut/preinstall:
 gabut/CMakeFiles/image_processing.dir/all:
 	$(MAKE) -f gabut/CMakeFiles/image_processing.dir/build.make gabut/CMakeFiles/image_processing.dir/depend
 	$(MAKE) -f gabut/CMakeFiles/image_processing.dir/build.make gabut/CMakeFiles/image_processing.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=19,20 "Built target image_processing"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=21,22 "Built target image_processing"
 .PHONY : gabut/CMakeFiles/image_processing.dir/all
 
 # Include target in all.
@@ -581,7 +581,7 @@ gabut/CMakeFiles/gabut_generate_messages_py.dir/all: gabut/CMakeFiles/std_msgs_g
 gabut/CMakeFiles/gabut_generate_messages_py.dir/all: gabut/CMakeFiles/mavros_msgs_generate_messages_py.dir/all
 	$(MAKE) -f gabut/CMakeFiles/gabut_generate_messages_py.dir/build.make gabut/CMakeFiles/gabut_generate_messages_py.dir/depend
 	$(MAKE) -f gabut/CMakeFiles/gabut_generate_messages_py.dir/build.make gabut/CMakeFiles/gabut_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=6,7 "Built target gabut_generate_messages_py"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=8,9 "Built target gabut_generate_messages_py"
 .PHONY : gabut/CMakeFiles/gabut_generate_messages_py.dir/all
 
 # Build rule for subdir invocation for target.
@@ -648,7 +648,7 @@ gabut/CMakeFiles/gabut_generate_messages_nodejs.dir/all: gabut/CMakeFiles/std_ms
 gabut/CMakeFiles/gabut_generate_messages_nodejs.dir/all: gabut/CMakeFiles/mavros_msgs_generate_messages_nodejs.dir/all
 	$(MAKE) -f gabut/CMakeFiles/gabut_generate_messages_nodejs.dir/build.make gabut/CMakeFiles/gabut_generate_messages_nodejs.dir/depend
 	$(MAKE) -f gabut/CMakeFiles/gabut_generate_messages_nodejs.dir/build.make gabut/CMakeFiles/gabut_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=5 "Built target gabut_generate_messages_nodejs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=7 "Built target gabut_generate_messages_nodejs"
 .PHONY : gabut/CMakeFiles/gabut_generate_messages_nodejs.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1255,43 +1255,6 @@ clean: gabut/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target gabut/CMakeFiles/manual_rov.dir
-
-# All Build rule for target.
-gabut/CMakeFiles/manual_rov.dir/all:
-	$(MAKE) -f gabut/CMakeFiles/manual_rov.dir/build.make gabut/CMakeFiles/manual_rov.dir/depend
-	$(MAKE) -f gabut/CMakeFiles/manual_rov.dir/build.make gabut/CMakeFiles/manual_rov.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=21,22 "Built target manual_rov"
-.PHONY : gabut/CMakeFiles/manual_rov.dir/all
-
-# Include target in all.
-all: gabut/CMakeFiles/manual_rov.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-gabut/CMakeFiles/manual_rov.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mfikih15/Documents/ROV/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/manual_rov.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mfikih15/Documents/ROV/build/CMakeFiles 0
-.PHONY : gabut/CMakeFiles/manual_rov.dir/rule
-
-# Convenience name for target.
-manual_rov: gabut/CMakeFiles/manual_rov.dir/rule
-
-.PHONY : manual_rov
-
-# clean rule for target.
-gabut/CMakeFiles/manual_rov.dir/clean:
-	$(MAKE) -f gabut/CMakeFiles/manual_rov.dir/build.make gabut/CMakeFiles/manual_rov.dir/clean
-.PHONY : gabut/CMakeFiles/manual_rov.dir/clean
-
-# clean rule for target.
-clean: gabut/CMakeFiles/manual_rov.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
 # Target rules for target gabut/CMakeFiles/gabut_generate_messages_lisp.dir
 
 # All Build rule for target.
@@ -1301,7 +1264,7 @@ gabut/CMakeFiles/gabut_generate_messages_lisp.dir/all: gabut/CMakeFiles/mavros_m
 gabut/CMakeFiles/gabut_generate_messages_lisp.dir/all: gabut/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/all
 	$(MAKE) -f gabut/CMakeFiles/gabut_generate_messages_lisp.dir/build.make gabut/CMakeFiles/gabut_generate_messages_lisp.dir/depend
 	$(MAKE) -f gabut/CMakeFiles/gabut_generate_messages_lisp.dir/build.make gabut/CMakeFiles/gabut_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=4 "Built target gabut_generate_messages_lisp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=6 "Built target gabut_generate_messages_lisp"
 .PHONY : gabut/CMakeFiles/gabut_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1643,6 +1606,43 @@ gabut/CMakeFiles/geometry_msgs_generate_messages_eus.dir/clean:
 
 # clean rule for target.
 clean: gabut/CMakeFiles/geometry_msgs_generate_messages_eus.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target gabut/CMakeFiles/controller.dir
+
+# All Build rule for target.
+gabut/CMakeFiles/controller.dir/all:
+	$(MAKE) -f gabut/CMakeFiles/controller.dir/build.make gabut/CMakeFiles/controller.dir/depend
+	$(MAKE) -f gabut/CMakeFiles/controller.dir/build.make gabut/CMakeFiles/controller.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=1,2 "Built target controller"
+.PHONY : gabut/CMakeFiles/controller.dir/all
+
+# Include target in all.
+all: gabut/CMakeFiles/controller.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+gabut/CMakeFiles/controller.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mfikih15/Documents/ROV/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/controller.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mfikih15/Documents/ROV/build/CMakeFiles 0
+.PHONY : gabut/CMakeFiles/controller.dir/rule
+
+# Convenience name for target.
+controller: gabut/CMakeFiles/controller.dir/rule
+
+.PHONY : controller
+
+# clean rule for target.
+gabut/CMakeFiles/controller.dir/clean:
+	$(MAKE) -f gabut/CMakeFiles/controller.dir/build.make gabut/CMakeFiles/controller.dir/clean
+.PHONY : gabut/CMakeFiles/controller.dir/clean
+
+# clean rule for target.
+clean: gabut/CMakeFiles/controller.dir/clean
 
 .PHONY : clean
 
@@ -2278,7 +2278,7 @@ gabut/CMakeFiles/gabut_generate_messages_cpp.dir/all: gabut/CMakeFiles/std_msgs_
 gabut/CMakeFiles/gabut_generate_messages_cpp.dir/all: gabut/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/all
 	$(MAKE) -f gabut/CMakeFiles/gabut_generate_messages_cpp.dir/build.make gabut/CMakeFiles/gabut_generate_messages_cpp.dir/depend
 	$(MAKE) -f gabut/CMakeFiles/gabut_generate_messages_cpp.dir/build.make gabut/CMakeFiles/gabut_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=1 "Built target gabut_generate_messages_cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=3 "Built target gabut_generate_messages_cpp"
 .PHONY : gabut/CMakeFiles/gabut_generate_messages_cpp.dir/all
 
 # Build rule for subdir invocation for target.
@@ -2313,7 +2313,7 @@ gabut/CMakeFiles/gabut_generate_messages_eus.dir/all: gabut/CMakeFiles/sensor_ms
 gabut/CMakeFiles/gabut_generate_messages_eus.dir/all: gabut/CMakeFiles/mavros_msgs_generate_messages_eus.dir/all
 	$(MAKE) -f gabut/CMakeFiles/gabut_generate_messages_eus.dir/build.make gabut/CMakeFiles/gabut_generate_messages_eus.dir/depend
 	$(MAKE) -f gabut/CMakeFiles/gabut_generate_messages_eus.dir/build.make gabut/CMakeFiles/gabut_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=2,3 "Built target gabut_generate_messages_eus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mfikih15/Documents/ROV/build/CMakeFiles --progress-num=4,5 "Built target gabut_generate_messages_eus"
 .PHONY : gabut/CMakeFiles/gabut_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
