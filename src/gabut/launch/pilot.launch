@@ -1,0 +1,3 @@
+<launch>
+	<node name="image_pilot" pkg="gabut" output="screen" type="image_pilot" />
+</launch>

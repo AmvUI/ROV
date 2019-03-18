@@ -100,6 +100,17 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: install/local
+
+.PHONY : install/local/fast
+
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
@@ -121,17 +132,6 @@ test:
 test/fast: test
 
 .PHONY : test/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: install/local
-
-.PHONY : install/local/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -631,6 +631,21 @@ uuid_msgs_generate_messages_nodejs/fast:
 .PHONY : uuid_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
+gabut/CMakeFiles/image_pilot.dir/rule:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/image_pilot.dir/rule
+.PHONY : gabut/CMakeFiles/image_pilot.dir/rule
+
+# Convenience name for target.
+image_pilot: gabut/CMakeFiles/image_pilot.dir/rule
+
+.PHONY : image_pilot
+
+# fast build rule for target.
+image_pilot/fast:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/image_pilot.dir/build.make gabut/CMakeFiles/image_pilot.dir/build
+.PHONY : image_pilot/fast
+
+# Convenience name for target.
 gabut/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/rule:
 	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/rule
 .PHONY : gabut/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/rule
@@ -879,6 +894,33 @@ src/debug_makara.cpp.s:
 	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/debug_makara.dir/build.make gabut/CMakeFiles/debug_makara.dir/src/debug_makara.cpp.s
 .PHONY : src/debug_makara.cpp.s
 
+src/image_pilot.o: src/image_pilot.cpp.o
+
+.PHONY : src/image_pilot.o
+
+# target to build an object file
+src/image_pilot.cpp.o:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/image_pilot.dir/build.make gabut/CMakeFiles/image_pilot.dir/src/image_pilot.cpp.o
+.PHONY : src/image_pilot.cpp.o
+
+src/image_pilot.i: src/image_pilot.cpp.i
+
+.PHONY : src/image_pilot.i
+
+# target to preprocess a source file
+src/image_pilot.cpp.i:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/image_pilot.dir/build.make gabut/CMakeFiles/image_pilot.dir/src/image_pilot.cpp.i
+.PHONY : src/image_pilot.cpp.i
+
+src/image_pilot.s: src/image_pilot.cpp.s
+
+.PHONY : src/image_pilot.s
+
+# target to generate assembly for a file
+src/image_pilot.cpp.s:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/image_pilot.dir/build.make gabut/CMakeFiles/image_pilot.dir/src/image_pilot.cpp.s
+.PHONY : src/image_pilot.cpp.s
+
 src/image_processing.o: src/image_processing.cpp.o
 
 .PHONY : src/image_processing.o
@@ -997,6 +1039,7 @@ help:
 	@echo "... install"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... install/local"
 	@echo "... _gabut_generate_messages_check_deps_image_process"
 	@echo "... gabut_generate_messages_nodejs"
 	@echo "... mavros_msgs_generate_messages_py"
@@ -1030,6 +1073,7 @@ help:
 	@echo "... rov_remote"
 	@echo "... geometry_msgs_generate_messages_lisp"
 	@echo "... uuid_msgs_generate_messages_nodejs"
+	@echo "... image_pilot"
 	@echo "... uuid_msgs_generate_messages_lisp"
 	@echo "... uuid_msgs_generate_messages_py"
 	@echo "... geometry_msgs_generate_messages_nodejs"
@@ -1043,13 +1087,15 @@ help:
 	@echo "... geographic_msgs_generate_messages_eus"
 	@echo "... video_mini"
 	@echo "... controller"
-	@echo "... install/local"
 	@echo "... src/controller.o"
 	@echo "... src/controller.i"
 	@echo "... src/controller.s"
 	@echo "... src/debug_makara.o"
 	@echo "... src/debug_makara.i"
 	@echo "... src/debug_makara.s"
+	@echo "... src/image_pilot.o"
+	@echo "... src/image_pilot.i"
+	@echo "... src/image_pilot.s"
 	@echo "... src/image_processing.o"
 	@echo "... src/image_processing.i"
 	@echo "... src/image_processing.s"

@@ -1882,6 +1882,19 @@ uuid_msgs_generate_messages_nodejs/fast:
 .PHONY : uuid_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
+# Target rules for targets named image_pilot
+
+# Build rule for target.
+image_pilot: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 image_pilot
+.PHONY : image_pilot
+
+# fast build rule for target.
+image_pilot/fast:
+	$(MAKE) -f gabut/CMakeFiles/image_pilot.dir/build.make gabut/CMakeFiles/image_pilot.dir/build
+.PHONY : image_pilot/fast
+
+#=============================================================================
 # Target rules for targets named uuid_msgs_generate_messages_lisp
 
 # Build rule for target.
@@ -2494,6 +2507,7 @@ help:
 	@echo "... rov_remote"
 	@echo "... geometry_msgs_generate_messages_lisp"
 	@echo "... uuid_msgs_generate_messages_nodejs"
+	@echo "... image_pilot"
 	@echo "... uuid_msgs_generate_messages_lisp"
 	@echo "... uuid_msgs_generate_messages_py"
 	@echo "... geometry_msgs_generate_messages_nodejs"

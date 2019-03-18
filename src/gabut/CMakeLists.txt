@@ -192,6 +192,12 @@ add_executable(debug_makara src/debug_makara.cpp )
 target_link_libraries(debug_makara
 ${catkin_LIBRARIES}
 )
+
+add_executable(image_pilot src/image_pilot.cpp )
+target_link_libraries(image_pilot
+${catkin_LIBRARIES}
+${OpenCV_LIBRARIES}
+)
 #############
 ## Install ##
 #############

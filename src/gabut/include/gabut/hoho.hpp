@@ -115,3 +115,5 @@ string strip_text;
 string circle_text;
 string square_text;
 string tri_text;
+
+int thickness = 2;
