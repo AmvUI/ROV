@@ -27,6 +27,10 @@ iostream
 -
 stdio.h
 -
+string.h
+-
+cstdlib
+-
 
 /home/mfikih15/Documents/ROV/src/gabut/src/rov_remote.cpp
 ../include/gabut/hoho.hpp

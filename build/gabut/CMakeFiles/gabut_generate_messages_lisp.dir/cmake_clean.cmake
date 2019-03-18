@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/gabut_generate_messages_lisp"
   "/home/mfikih15/Documents/ROV/devel/share/common-lisp/ros/gabut/msg/number_rc.lisp"
+  "/home/mfikih15/Documents/ROV/devel/share/common-lisp/ros/gabut/msg/image_process.lisp"
 )
 
 # Per-language clean rules from dependency scanning.

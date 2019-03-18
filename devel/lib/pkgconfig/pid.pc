@@ -1,0 +1,8 @@
+prefix=/home/mfikih15/Documents/ROV/devel
+
+Name: pid
+Description: Description of pid
+Version: 0.0.7
+Cflags: -I/home/mfikih15/Documents/ROV/devel/include
+Libs: -L/home/mfikih15/Documents/ROV/devel/lib 
+Requires: roscpp std_msgs message_runtime

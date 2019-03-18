@@ -11,6 +11,10 @@ iostream
 -
 stdio.h
 -
+string.h
+-
+cstdlib
+-
 
 /home/mfikih15/Documents/ROV/src/gabut/src/video_mini.cpp
 ../include/gabut/hoho.hpp

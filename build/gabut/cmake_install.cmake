@@ -33,7 +33,10 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gabut/msg" TYPE FILE FILES "/home/mfikih15/Documents/ROV/src/gabut/msg/number_rc.msg")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gabut/msg" TYPE FILE FILES
+    "/home/mfikih15/Documents/ROV/src/gabut/msg/number_rc.msg"
+    "/home/mfikih15/Documents/ROV/src/gabut/msg/image_process.msg"
+    )
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")

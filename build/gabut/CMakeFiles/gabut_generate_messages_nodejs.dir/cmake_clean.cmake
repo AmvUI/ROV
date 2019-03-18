@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/gabut_generate_messages_nodejs"
   "/home/mfikih15/Documents/ROV/devel/share/gennodejs/ros/gabut/msg/number_rc.js"
+  "/home/mfikih15/Documents/ROV/devel/share/gennodejs/ros/gabut/msg/image_process.js"
 )
 
 # Per-language clean rules from dependency scanning.

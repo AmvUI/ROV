@@ -6,6 +6,7 @@
 #include <cv_bridge/cv_bridge.h>
 #include <iostream>
 #include <stdio.h>
+#include "gabut/image_process.h"
 
 using namespace std;
 using namespace cv;
@@ -16,6 +17,9 @@ void firstMissionProcessing(Mat input_image);
 void secondMissionProcessing(Mat input_image);
 void thirdMissionProcessing(Mat input_image);
 void miniProcessing(Mat input_image);
+
+gabut::image_process image;
+ros::Publisher pub_state_camera;
 
 void rovCallback(const sensor_msgs::CompressedImageConstPtr& msg)
 {
@@ -54,18 +58,19 @@ int main(int argc, char **argv){
 	
 	image_transport::ImageTransport it(nh);
 	
+	pub_state_camera 			= nh.advertise<gabut::image_process>("/mate/image/process", 1);
 	ros::Subscriber sub_rov 	= nh.subscribe("/mate/image/rov/compressed", 1, rovCallback);
 	ros::Subscriber sub_mini 	= nh.subscribe("/mate/image/mini/compressed", 1, miniCallback);
 	
 	namedWindow("panel", CV_WINDOW_AUTOSIZE);
 	
-	createTrackbar("LowH_red", "panel_red", &LowH_red, 255);
-	createTrackbar("HighH_red", "panel_red", &HighH_red, 255);
-	createTrackbar("LowS_red", "panel_red", &LowS_red, 255); 
-	createTrackbar("HighS_red", "panel_red", &HighS_red, 255);
-	createTrackbar("LowV_red", "panel_red", &LowV_red, 255);
-	createTrackbar("HighV_red", "panel_red", &HighV_red, 255);
-	createTrackbar("noise_red", "panel_red", &Noise_red, 255);
+	createTrackbar("LowH_red", "panel", &LowH_red, 255);
+	createTrackbar("HighH_red", "panel", &HighH_red, 255);
+	createTrackbar("LowS_red", "panel", &LowS_red, 255); 
+	createTrackbar("HighS_red", "panel", &HighS_red, 255);
+	createTrackbar("LowV_red", "panel", &LowV_red, 255);
+	createTrackbar("HighV_red", "panel", &HighV_red, 255);
+	createTrackbar("noise_red", "panel", &Noise_red, 255);
 
 	createTrackbar("LowH_blue", "panel", &LowH_blue, 255);
 	createTrackbar("HighH_blue", "panel", &HighH_blue, 255);
@@ -74,6 +79,16 @@ int main(int argc, char **argv){
 	createTrackbar("LowV_blue", "panel", &LowV_blue, 255);
 	createTrackbar("HighV_blue", "panel", &HighV_blue, 255);
 	createTrackbar("noise_blue", "panel", &Noise_blue, 255);
+	
+	createTrackbar("LowH_black", "panel", &LowH_black, 255);
+	createTrackbar("HighH_black", "panel", &HighH_black, 255);
+	createTrackbar("LowS_black", "panel", &LowS_black, 255); 
+	createTrackbar("HighS_black", "panel", &HighS_black, 255);
+	createTrackbar("LowV_black", "panel", &LowV_black, 255);
+	createTrackbar("HighV_black", "panel", &HighV_black, 255);
+	createTrackbar("noise_black", "panel", &Noise_black, 255);
+	createTrackbar("MaxRadius", "panel", &max_radius_black, 1000);
+	createTrackbar("MinRadius", "panel", &min_radius_black, 1000);
 
 	createTrackbar("x", "panel", &x_init, 700); //Hue (0 - 255)
 	createTrackbar("y", "panel", &y_init, 700);
@@ -87,14 +102,16 @@ int main(int argc, char **argv){
 
 
 void firstMissionProcessing(Mat input_image){
+	Mat first_all = input_image.clone();
+	
 	Rect region_of_interest = Rect(x_init, y_init, width, height);
-	Mat Original = input_image(region_of_interest);
+	Mat Original = first_all(region_of_interest);
 	
 	Size sz = Original.size();
 	int original_height = sz.height; 
 	int original_width	= sz.width;
 	
-	Size sx = input_image.size();
+	Size sx = first_all.size();
 	int input_height = sx.height;
 	int input_width = sx.width; 
 	
@@ -104,7 +121,7 @@ void firstMissionProcessing(Mat input_image){
 	int sum_y_red = 0;
 	
 	//debug for all red
-	imgDebug_red = input_image.clone();
+	imgDebug_red = first_all.clone();
 	medianBlur(imgDebug_red, imgDebug_red, 5);
 	cvtColor(imgDebug_red, imgDebug_red, COLOR_BGR2HSV);
 	inRange(imgDebug_red, Scalar(LowH_red, LowS_red, LowV_red), Scalar(HighH_red, HighS_red, HighV_red), imgDebug_red);//range threshold
@@ -135,7 +152,7 @@ void firstMissionProcessing(Mat input_image){
 	int sum_y_blue = 0;
 	
 	//debug for all blue
-	imgDebug_blue = input_image.clone();
+	imgDebug_blue = first_all.clone();
 	medianBlur(imgDebug_blue, imgDebug_blue, 5);
 	cvtColor(imgDebug_blue, imgDebug_blue, COLOR_BGR2HSV);
 	inRange(imgDebug_blue, Scalar(LowH_blue, LowS_blue, LowV_blue), Scalar(HighH_blue, HighS_blue, HighV_blue), imgDebug_blue);//range threshold
@@ -163,33 +180,120 @@ void firstMissionProcessing(Mat input_image){
 	int state_red = posX_red;
 	int state_blue = posX_blue;
 	
-	//red
-	line( input_image, Point( red_setpoint, 0 ), Point( red_setpoint, input_height), Scalar( 50, 50, 50 ), 2, 8 );
-	line( input_image, Point( state_red, 0 ), Point( state_red, input_height), Scalar( 150, 150, 150 ), 2, 8 );
+	//red state
+	line( first_all, Point( red_setpoint, 0 ), Point( red_setpoint, input_height), Scalar( 50, 50, 50 ), 2, 8 );
+	line( first_all, Point( state_red, 0 ), Point( state_red, input_height), Scalar( 150, 150, 150 ), 2, 8 );
 	
-	//blue
-	line( input_image, Point( blue_setpoint, 0 ), Point( blue_setpoint, input_height), Scalar( 50, 50, 50 ), 2, 8 );
-	line( input_image, Point( state_blue, 0 ), Point( state_blue, input_height), Scalar( 150, 150, 150 ), 2, 8 );
+	//blue state
+	line( first_all, Point( blue_setpoint, 0 ), Point( blue_setpoint, input_height), Scalar( 50, 50, 50 ), 2, 8 );
+	line( first_all, Point( state_blue, 0 ), Point( state_blue, input_height), Scalar( 150, 150, 150 ), 2, 8 );
 	
 	//roi
-	line( input_image, Point( x_init, y_init ), Point( x_init+original_width, y_init), Scalar( 100, 100, 100 ), 2, 8 );
-	line( input_image, Point( x_init, y_init+original_height ), Point( x_init+original_width, y_init+original_height), Scalar( 100, 100, 100 ), 2, 8 );	
-	line( input_image, Point( x_init, y_init ), Point( x_init, y_init+original_height), Scalar( 100, 100, 100 ), 2, 8 );
-	line( input_image, Point( x_init+original_width, y_init ), Point( x_init+original_width, y_init+original_height), Scalar( 100, 100, 100 ), 2, 8 );
+	line( first_all, Point( x_init, y_init ), Point( x_init+original_width, y_init), Scalar( 100, 100, 100 ), 2, 8 );
+	line( first_all, Point( x_init, y_init+original_height ), Point( x_init+original_width, y_init+original_height), Scalar( 100, 100, 100 ), 2, 8 );	
+	line( first_all, Point( x_init, y_init ), Point( x_init, y_init+original_height), Scalar( 100, 100, 100 ), 2, 8 );
+	line( first_all, Point( x_init+original_width, y_init ), Point( x_init+original_width, y_init+original_height), Scalar( 100, 100, 100 ), 2, 8 );
 	
+	image.state_red 	= state_red;
+	image.state_blue 	= state_blue;
+	image.blue_crack 	= mu_blue.m10;
 	
-	//image.state_red = state;
-	//pub_state_camera.publish(image);
+	pub_state_camera.publish(image);
 	
-	imshow("Threshold_Red", imgThresholded_red);
-	imshow("All_Red", imgDebug_red);
+	imshow("first_th_Red", imgThresholded_red);
+	imshow("first_th_blue", imgThresholded_blue);
 	
-	//imshow("Roi", Original);	
-	imshow("Input_Red", input_image);
+	imshow("fisrt_Red", imgDebug_red);
+	imshow("first_blue", imgDebug_blue);
+	
+	imshow("first", first_all);
 }
 
 void secondMissionProcessing(Mat input_image){
-	imshow("second", input_image);
+	Mat Original = input_image.clone();
+	Mat imgHSV, allColour, allContour, Threshold, BW;
+	int Index;
+	cvtColor(Original, imgHSV, COLOR_BGR2HSV);
+			
+	erode(imgHSV, imgHSV, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) );
+	dilate( imgHSV, imgHSV, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) ); 
+
+	dilate( imgHSV, imgHSV, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) ); 
+	erode(imgHSV, imgHSV, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) );
+		
+	inRange(imgHSV, Scalar(LowH_black, LowS_black, LowV_black), Scalar(HighH_black, HighS_black, HighV_black), Threshold); //Threshold the image
+		
+	Canny(Threshold, BW, 0, 50, 5);
+		
+	vector<vector<Point> > Contours;
+		
+	findContours(BW, Contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
+			
+	vector<Point> Approx;
+	int count_triangle, count_square, count_strip, count_circle;
+	
+	for (Index = 0; Index < Contours.size(); Index++){
+		approxPolyDP(Mat(Contours[Index]), Approx, arcLength(Mat(Contours[Index]), true)*0.02, true);
+		
+		if (fabs(contourArea(Contours[Index])) < 5000 || !isContourConvex(Approx))
+		continue;
+
+		if (Approx.size() == 3){
+			count_triangle++;
+		}
+		
+		if (Approx.size() == 4){
+			Moments mu_black=moments(Threshold);
+			int area_black = mu_black.m00; // sum of zero'th moment is area
+			int posX_black = mu_black.m10/area_black; // center of mass = w*x/weight
+			int posY_black = mu_black.m01/area_black;// center of mass = w*y/high
+			area_black /= 255; // scale from bytes to pixels	
+			if(mu_black.m10<0.5*mu_black.m01){
+				count_strip++;
+			}
+			else{
+				count_square++;
+			}
+		}
+	}
+	
+	GaussianBlur(Threshold, Threshold, Size(9, 9), 2, 2);
+	
+	vector<Vec3f> circles;
+	HoughCircles(Threshold, circles, HOUGH_GRADIENT, 1,
+		Threshold.rows/16, 
+		100, 30, min_radius_black, max_radius_black);
+		
+	for (size_t i = 0; i < circles.size(); i++ ){
+		count_circle++;
+	}
+	
+	line( Original, Point( strip_x, strip_y1 ), Point( strip_x, strip_y2), Scalar( 50, 50, 50 ), 2, 8 );	
+	circle( Original, Point(circle_x, circle_y), 10, Scalar( 0, 255, 255 ), 2);
+	rectangle(Original,Rect(square_x,square_y,100,100),Scalar(0,255,255),3,8,0);
+	line( Original, Point( tri_x1, tri_y1 ), Point( tri_x2, tri_y2), Scalar( 150, 150, 150 ), 2, 8 );
+	line( Original, Point( tri_x2, tri_y2 ), Point( tri_x3, tri_y3), Scalar( 150, 150, 150 ), 2, 8 );	
+	line( Original, Point( tri_x3, tri_y3 ), Point( tri_x1, tri_y1), Scalar( 150, 150, 150 ), 2, 8 );	
+	
+	
+	stringstream ss; 
+	ss << count_square;
+	square_text = ss.str();
+	ss << count_triangle;
+	tri_text = ss.str();
+	ss << count_circle;
+	circle_text = ss.str();
+	ss << count_strip;
+	strip_text = ss.str();
+	
+	putText(Original, square_text, Point(square_x_text, square_y_text), FONT_HERSHEY_DUPLEX, 1, Scalar(0,255,255), 2);
+	putText(Original, circle_text, Point(circle_x_text, circle_y_text), FONT_HERSHEY_DUPLEX, 1, Scalar(0,255,255), 2);
+	putText(Original, tri_text, Point(tri_x_text, tri_y_text), FONT_HERSHEY_DUPLEX, 1, Scalar(0,255,255), 2);
+	putText(Original, strip_text, Point(strip_x_text, strip_y_text), FONT_HERSHEY_DUPLEX, 1, Scalar(0,255,255), 2);
+	
+	imshow("second colour", Threshold);
+	imshow("second contour", BW);
+	imshow("second", Original);
 }
 
 void thirdMissionProcessing(Mat input_image){

@@ -1,5 +1,17 @@
 #include <iostream>
 #include <stdio.h>
+#include <string.h>
+#include <cstdlib>
+
+using namespace std;
+
+float kp = 1.65;//1.5
+float ki = 1;//1
+float kd = 0.5;//0.5
+
+float update_time=0.01;
+float delta_t = 0.01;
+float initial_time = 0; 
 
 int camera_rov = 0;
 int camera_mini = 1;
@@ -27,6 +39,10 @@ int camera_mini = 1;
 #define middleMotor  	1520
 #define middleSteering  1520
 #define middleThrottle 	1520
+
+#define autoStabil 		1520
+#define autoMotor		1520
+#define autoThrottle	1520
 
 float pwmServo =	1500;
 float maxServo =	1900;
@@ -59,5 +75,43 @@ int LowV_blue 	= 49;		//49   242
 int HighV_blue 	= 230;		//230  255
 int Noise_blue 	= 15;
 
+int LowH_black 	= 0; 		//0  
+int HighH_black = 184;		//184 
+int LowS_black	= 130;      //130  65
+int HighS_black = 248;      //248  246
+int LowV_black	= 49;		//49   242
+int HighV_black = 230;		//230  255
+int Noise_black = 15;
+int min_radius_black=10;
+int max_radius_black=15;
+
 int red_setpoint = 320;
 int blue_setpoint = 320;
+
+int strip_x 	= 100;
+int strip_y1 	= 100;
+int strip_y2	= 150;
+int circle_x 	= 100;
+int circle_y	= 100;
+int square_x	= 200;
+int square_y 	= 200;
+int tri_x1 		= 100;
+int tri_x2		= 150;
+int tri_x3 		= 300;
+int tri_y1		= 230;
+int tri_y2		= 320;
+int tri_y3		= 260;
+
+int tri_x_text =  100;
+int tri_y_text = 100;
+int square_x_text = 200;
+int square_y_text = 200;
+int circle_x_text = 300;
+int circle_y_text = 300;
+int strip_x_text = 400;
+int strip_y_text = 400;
+
+string strip_text;
+string circle_text;
+string square_text;
+string tri_text;

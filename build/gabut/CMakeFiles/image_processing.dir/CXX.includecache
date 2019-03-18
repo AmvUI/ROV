@@ -6,10 +6,30 @@
 
 #IncludeRegexTransform: 
 
+/home/mfikih15/Documents/ROV/devel/include/gabut/image_process.h
+string
+-
+vector
+-
+map
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+
 /home/mfikih15/Documents/ROV/src/gabut/include/gabut/hoho.hpp
 iostream
 -
 stdio.h
+-
+string.h
+-
+cstdlib
 -
 
 /home/mfikih15/Documents/ROV/src/gabut/src/image_processing.cpp
@@ -29,6 +49,8 @@ iostream
 -
 stdio.h
 -
+gabut/image_process.h
+/home/mfikih15/Documents/ROV/src/gabut/src/gabut/image_process.h
 
 /opt/ros/kinetic/include/cv_bridge/cv_bridge.h
 sensor_msgs/Image.h

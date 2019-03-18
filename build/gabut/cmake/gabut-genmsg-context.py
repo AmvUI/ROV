@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/mfikih15/Documents/ROV/src/gabut/msg/number_rc.msg"
+messages_str = "/home/mfikih15/Documents/ROV/src/gabut/msg/number_rc.msg;/home/mfikih15/Documents/ROV/src/gabut/msg/image_process.msg"
 services_str = ""
 pkg_name = "gabut"
 dependencies_str = "mavros_msgs;std_msgs;sensor_msgs"

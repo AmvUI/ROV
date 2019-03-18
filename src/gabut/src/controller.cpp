@@ -6,6 +6,10 @@
 #include <stdio.h>
 #include <sensor_msgs/Joy.h>
 #include "gabut/number_rc.h"
+#include "gabut/image_process.h"
+#include "pid/plant_msg.h"
+#include "pid/controller_msg.h"
+#include "pid/pid_const_msg.h"
 
 using namespace std;
 
@@ -18,25 +22,39 @@ int mode;
 
 bool lastArmed = false;
 
-void checkController();
-
-void control_cb (const gabut::number_rc& msg);
-
 mavros_msgs::OverrideRCIn rovRcIn;
 mavros_msgs::SetMode flight;
-	
-ros::Publisher pub_override_rc;
 
+pid::plant_msg  pid_in;
+pid::pid_const_msg pid_const;
+
+int state_red;
+int state_blue;
+int control_effort;
+
+void image_process_cb(const gabut::image_process& image);
+void pid_receiver_cb(const pid::controller_msg& control);
 void joyCallback(const sensor_msgs::Joy::ConstPtr& joy);
+void control_cb (const gabut::number_rc& msg);
+void checkController();
+
+ros::Publisher pub_pid_in; 
+ros::Publisher pub_pid_const;
+ros::Publisher pub_override_rc;
 
 int main(int argc, char** argv){
 	ros::init(argc, argv, "subPixhawk");
 	ros::NodeHandle nh;
 	
-	pub_override_rc 	= nh.advertise<mavros_msgs::OverrideRCIn>("/mavros/rc/override", 10);
-	ros::Subscriber joy_sub 		= nh.subscribe<sensor_msgs::Joy>("joy", 8, &joyCallback);
-	ros::Subscriber sub_pid_status 	= nh.subscribe("/mate/rov/number", 1, &control_cb);
-	ros::ServiceClient client 		= nh.serviceClient<mavros_msgs::SetMode>("/mavros/set_mode");
+	pub_override_rc = nh.advertise<mavros_msgs::OverrideRCIn>("/mavros/rc/override", 10);
+	pub_pid_in		= nh.advertise<pid::plant_msg>("/mate/pid/in", 1);
+	pub_pid_const 	= nh.advertise<pid::pid_const_msg>("/mate/pid/const", 1,true);
+
+	ros::Subscriber sub_pid_x_out 		= nh.subscribe("/mate/pid/out", 10, pid_receiver_cb );
+	ros::Subscriber sub_image_process 	= nh.subscribe("/mate/image/process", 1, image_process_cb);
+	ros::Subscriber joy_sub 			= nh.subscribe<sensor_msgs::Joy>("joy", 8, &joyCallback);
+	ros::Subscriber sub_mode_rc 		= nh.subscribe("/mate/rov/number", 1, &control_cb);
+	ros::ServiceClient client 			= nh.serviceClient<mavros_msgs::SetMode>("/mavros/set_mode");
 	
 	flight.request.base_mode = 0;
 	flight.request.custom_mode = "MANUAL";
@@ -49,6 +67,13 @@ int main(int argc, char** argv){
 	system("rosrun mavros mavsafety arm");
 	system("rosrun mavros mavsafety arm");
 	system("rosrun mavros mavsafety arm");
+		
+	pid_const.p = kp;
+	pid_const.i = ki;
+	pid_const.d = kd;
+	pub_pid_const.publish(pid_const);
+	
+	pid_in.t = initial_time;
 		
 	while( ros::ok() ){	
 		ros::spinOnce();
@@ -134,9 +159,75 @@ void joyCallback(const sensor_msgs::Joy::ConstPtr& joy){
 		rovRcIn.channels[SERVO2] = pwmServo;
 		pub_override_rc.publish(rovRcIn);		
 	}	
+	
+	else if(mode==1){//mode auto	
+		for(int i=0; i < 8; i++) rovRcIn.channels[i] = 0;	//Releases all Channels First
+		
+		rovRcIn.channels[MOTOR1] = autoStabil;
+		rovRcIn.channels[MOTOR2] = autoMotor;
+		rovRcIn.channels[MOTOR3] = autoMotor;		
+		
+		pid_in.x = state_red;
+		pid_in.t = pid_in.t+delta_t;
+		pid_in.setpoint = red_setpoint;
+		pub_pid_in.publish(pid_in);
+			
+		ros::spinOnce();
+		if(state_blue > 0){
+			mode==3;
+		}
+		if(state_red==0){rovRcIn.channels[STEERING_PIN] = middleSteering;}
+		else{rovRcIn.channels[STEERING_PIN] = middleSteering - control_effort;}
+		rovRcIn.channels[THROTTLE_PIN] = autoThrottle;
+		
+		pub_override_rc.publish(rovRcIn);		
+	}
+	if(mode==3){//mode blue	
+		for(int i=0; i < 8; i++) rovRcIn.channels[i] = 0;	//Releases all Channels First
+		
+		rovRcIn.channels[MOTOR1] = autoStabil;
+		rovRcIn.channels[MOTOR2] = autoMotor;
+		rovRcIn.channels[MOTOR3] = autoMotor;		
+		
+		//maju
+		rovRcIn.channels[STEERING_PIN] = middleSteering;
+		rovRcIn.channels[THROTTLE_PIN] = autoThrottle;
+		pub_override_rc.publish(rovRcIn);	
+		sleep(1);
+		
+		//kanan
+		rovRcIn.channels[STEERING_PIN] = maxSteering;
+		rovRcIn.channels[THROTTLE_PIN] = middleThrottle;
+		pub_override_rc.publish(rovRcIn);
+		sleep(1);
+		
+		//diam
+		rovRcIn.channels[STEERING_PIN] = middleSteering;
+		rovRcIn.channels[THROTTLE_PIN] = middleThrottle;
+		pub_override_rc.publish(rovRcIn);
+		sleep(5);
+		
+		//kiri
+		rovRcIn.channels[STEERING_PIN] = minSteering;
+		rovRcIn.channels[THROTTLE_PIN] = middleThrottle;
+		pub_override_rc.publish(rovRcIn);
+		sleep(1);
+		
+		//maju
+		rovRcIn.channels[STEERING_PIN] = middleSteering;
+		rovRcIn.channels[THROTTLE_PIN] = autoThrottle;
+		pub_override_rc.publish(rovRcIn);
+		sleep(1);
+		
+		mode == 2;
+		ros::spinOnce();			
+	}	
 }
 
-
+void image_process_cb(const gabut::image_process& image){
+	state_red 		= image.state_red;
+	state_blue 		= image.state_blue;
+}
 
 void checkController(){	
 	cout<<a<<"\t"<<b<<"\t"<<c<<"\t"<<d<<"\t"<<e<<"\t"<<f<<endl;
@@ -145,7 +236,10 @@ void checkController(){
 	cout<<endl<<endl<<endl;
 }
 
-
 void control_cb (const gabut::number_rc& msg){
 	mode=msg.rc_number;
+}
+
+void pid_receiver_cb(const pid::controller_msg& control){
+	control_effort = control.u;
 }
