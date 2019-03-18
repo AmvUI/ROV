@@ -52,6 +52,8 @@ int main(int argc, char **argv)
   
   while (nh.ok()) {
 		ros::spinOnce();
+		imshow("rov", imageROV);
+		imshow("mini", imageMini);
 	}
 }
 
