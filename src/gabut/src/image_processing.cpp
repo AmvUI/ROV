@@ -29,7 +29,7 @@ void rovCallback(const sensor_msgs::CompressedImageConstPtr& msg)
     waitKey(10);
     firstMissionProcessing(rov_image);
     secondMissionProcessing(rov_image);
-    thirdMissionProcessing(rov_image);
+    //thirdMissionProcessing(rov_image);
   }
   catch (cv_bridge::Exception& e)
   {
@@ -37,6 +37,7 @@ void rovCallback(const sensor_msgs::CompressedImageConstPtr& msg)
   }
 }
 
+/*
 void miniCallback(const sensor_msgs::CompressedImageConstPtr& msg)
 {
   try
@@ -50,7 +51,7 @@ void miniCallback(const sensor_msgs::CompressedImageConstPtr& msg)
     ROS_ERROR("Could not convert to image!");
   }
 }
-
+*/
 int main(int argc, char **argv){
 	ros::init(argc, argv, "videoRec");
 	ros::NodeHandle nh;
@@ -60,7 +61,7 @@ int main(int argc, char **argv){
 	
 	pub_state_camera 			= nh.advertise<gabut::image_process>("/mate/image/process", 1);
 	ros::Subscriber sub_rov 	= nh.subscribe("/mate/image/rov/compressed", 1, rovCallback);
-	ros::Subscriber sub_mini 	= nh.subscribe("/mate/image/mini/compressed", 1, miniCallback);
+	//ros::Subscriber sub_mini 	= nh.subscribe("/mate/image/mini/compressed", 1, miniCallback);
 	
 	namedWindow("panel", CV_WINDOW_AUTOSIZE);
 	

@@ -1,0 +1,6 @@
+<launch>
+	<node name="image_processing" pkg="gabut" output="screen" type="image_processing" />
+	<node name="video_rov" pkg="gabut" output="screen" type="video_rov" />
+	<node name="video_mini" pkg="gabut" output="screen" type="video_mini" />
+	<node name="image_pilot" pkg="gabut" output="screen" type="image_processing" />
+</launch>

@@ -167,6 +167,8 @@ void joyCallback(const sensor_msgs::Joy::ConstPtr& joy){
 		rovRcIn.channels[MOTOR2] = autoMotor;
 		rovRcIn.channels[MOTOR3] = autoMotor;		
 		
+		rovRcIn.channels[SERVO1] = pwmServo;
+		
 		pid_in.x = state_red;
 		pid_in.t = pid_in.t+delta_t;
 		pid_in.setpoint = red_setpoint;
@@ -187,7 +189,9 @@ void joyCallback(const sensor_msgs::Joy::ConstPtr& joy){
 		
 		rovRcIn.channels[MOTOR1] = autoStabil;
 		rovRcIn.channels[MOTOR2] = autoMotor;
-		rovRcIn.channels[MOTOR3] = autoMotor;		
+		rovRcIn.channels[MOTOR3] = autoMotor;
+		
+		rovRcIn.channels[SERVO1] = pwmServo;
 		
 		//maju
 		rovRcIn.channels[STEERING_PIN] = middleSteering;

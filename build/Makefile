@@ -1791,19 +1791,6 @@ mavros_msgs_generate_messages_nodejs/fast:
 .PHONY : mavros_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
-# Target rules for targets named debug_makara
-
-# Build rule for target.
-debug_makara: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 debug_makara
-.PHONY : debug_makara
-
-# fast build rule for target.
-debug_makara/fast:
-	$(MAKE) -f gabut/CMakeFiles/debug_makara.dir/build.make gabut/CMakeFiles/debug_makara.dir/build
-.PHONY : debug_makara/fast
-
-#=============================================================================
 # Target rules for targets named geometry_msgs_generate_messages_eus
 
 # Build rule for target.
@@ -2500,7 +2487,6 @@ help:
 	@echo "... geometry_msgs_generate_messages_py"
 	@echo "... geographic_msgs_generate_messages_lisp"
 	@echo "... mavros_msgs_generate_messages_nodejs"
-	@echo "... debug_makara"
 	@echo "... geometry_msgs_generate_messages_eus"
 	@echo "... image_processing"
 	@echo "... uuid_msgs_generate_messages_cpp"
