@@ -1778,19 +1778,6 @@ geometry_msgs_generate_messages_eus/fast:
 .PHONY : geometry_msgs_generate_messages_eus/fast
 
 #=============================================================================
-# Target rules for targets named image_processing
-
-# Build rule for target.
-image_processing: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 image_processing
-.PHONY : image_processing
-
-# fast build rule for target.
-image_processing/fast:
-	$(MAKE) -f gabut/CMakeFiles/image_processing.dir/build.make gabut/CMakeFiles/image_processing.dir/build
-.PHONY : image_processing/fast
-
-#=============================================================================
 # Target rules for targets named uuid_msgs_generate_messages_cpp
 
 # Build rule for target.
@@ -1997,6 +1984,32 @@ video_mini: cmake_check_build_system
 video_mini/fast:
 	$(MAKE) -f gabut/CMakeFiles/video_mini.dir/build.make gabut/CMakeFiles/video_mini.dir/build
 .PHONY : video_mini/fast
+
+#=============================================================================
+# Target rules for targets named first_mission
+
+# Build rule for target.
+first_mission: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 first_mission
+.PHONY : first_mission
+
+# fast build rule for target.
+first_mission/fast:
+	$(MAKE) -f gabut/CMakeFiles/first_mission.dir/build.make gabut/CMakeFiles/first_mission.dir/build
+.PHONY : first_mission/fast
+
+#=============================================================================
+# Target rules for targets named second_mission
+
+# Build rule for target.
+second_mission: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 second_mission
+.PHONY : second_mission
+
+# fast build rule for target.
+second_mission/fast:
+	$(MAKE) -f gabut/CMakeFiles/second_mission.dir/build.make gabut/CMakeFiles/second_mission.dir/build
+.PHONY : second_mission/fast
 
 #=============================================================================
 # Target rules for targets named controller
@@ -2460,7 +2473,6 @@ help:
 	@echo "... geographic_msgs_generate_messages_lisp"
 	@echo "... mavros_msgs_generate_messages_nodejs"
 	@echo "... geometry_msgs_generate_messages_eus"
-	@echo "... image_processing"
 	@echo "... uuid_msgs_generate_messages_cpp"
 	@echo "... rov_remote"
 	@echo "... geometry_msgs_generate_messages_lisp"
@@ -2477,6 +2489,8 @@ help:
 	@echo "... gabut_genpy"
 	@echo "... geographic_msgs_generate_messages_eus"
 	@echo "... video_mini"
+	@echo "... first_mission"
+	@echo "... second_mission"
 	@echo "... controller"
 	@echo "... geometry_msgs_generate_messages_cpp"
 	@echo "... run_tests_rosserial_test_rostest_test_rosserial_python_socket.test"

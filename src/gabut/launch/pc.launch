@@ -1,5 +1,6 @@
 <launch>
-	<node name="image_processing" pkg="gabut" output="screen" type="image_processing" />
+	<node name="first_mission" pkg="gabut" output="screen" type="first_mission" />
+	<node name="second_mission" pkg="gabut" output="screen" type="second_mission" />
 	<node name="rov_remote" pkg="gabut" output="screen" type="rov_remote" />
 	
 	<node respawn="true" pkg="joy" type="joy_node" name="turtle_joy" >

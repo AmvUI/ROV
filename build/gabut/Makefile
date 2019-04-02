@@ -89,17 +89,6 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: install/strip
-
-.PHONY : install/strip/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -110,6 +99,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: install/strip
+
+.PHONY : install/strip/fast
 
 # Special rule for the target install/local
 install/local: preinstall
@@ -511,21 +511,6 @@ geometry_msgs_generate_messages_eus/fast:
 .PHONY : geometry_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
-gabut/CMakeFiles/image_processing.dir/rule:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/image_processing.dir/rule
-.PHONY : gabut/CMakeFiles/image_processing.dir/rule
-
-# Convenience name for target.
-image_processing: gabut/CMakeFiles/image_processing.dir/rule
-
-.PHONY : image_processing
-
-# fast build rule for target.
-image_processing/fast:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/image_processing.dir/build.make gabut/CMakeFiles/image_processing.dir/build
-.PHONY : image_processing/fast
-
-# Convenience name for target.
 gabut/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/rule:
 	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/rule
 .PHONY : gabut/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/rule
@@ -766,6 +751,36 @@ video_mini/fast:
 .PHONY : video_mini/fast
 
 # Convenience name for target.
+gabut/CMakeFiles/first_mission.dir/rule:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/first_mission.dir/rule
+.PHONY : gabut/CMakeFiles/first_mission.dir/rule
+
+# Convenience name for target.
+first_mission: gabut/CMakeFiles/first_mission.dir/rule
+
+.PHONY : first_mission
+
+# fast build rule for target.
+first_mission/fast:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/first_mission.dir/build.make gabut/CMakeFiles/first_mission.dir/build
+.PHONY : first_mission/fast
+
+# Convenience name for target.
+gabut/CMakeFiles/second_mission.dir/rule:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/second_mission.dir/rule
+.PHONY : gabut/CMakeFiles/second_mission.dir/rule
+
+# Convenience name for target.
+second_mission: gabut/CMakeFiles/second_mission.dir/rule
+
+.PHONY : second_mission
+
+# fast build rule for target.
+second_mission/fast:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/second_mission.dir/build.make gabut/CMakeFiles/second_mission.dir/build
+.PHONY : second_mission/fast
+
+# Convenience name for target.
 gabut/CMakeFiles/controller.dir/rule:
 	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/controller.dir/rule
 .PHONY : gabut/CMakeFiles/controller.dir/rule
@@ -822,32 +837,32 @@ src/controller.cpp.s:
 	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/controller.dir/build.make gabut/CMakeFiles/controller.dir/src/controller.cpp.s
 .PHONY : src/controller.cpp.s
 
-src/image_processing.o: src/image_processing.cpp.o
+src/first_mission.o: src/first_mission.cpp.o
 
-.PHONY : src/image_processing.o
+.PHONY : src/first_mission.o
 
 # target to build an object file
-src/image_processing.cpp.o:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/image_processing.dir/build.make gabut/CMakeFiles/image_processing.dir/src/image_processing.cpp.o
-.PHONY : src/image_processing.cpp.o
+src/first_mission.cpp.o:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/first_mission.dir/build.make gabut/CMakeFiles/first_mission.dir/src/first_mission.cpp.o
+.PHONY : src/first_mission.cpp.o
 
-src/image_processing.i: src/image_processing.cpp.i
+src/first_mission.i: src/first_mission.cpp.i
 
-.PHONY : src/image_processing.i
+.PHONY : src/first_mission.i
 
 # target to preprocess a source file
-src/image_processing.cpp.i:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/image_processing.dir/build.make gabut/CMakeFiles/image_processing.dir/src/image_processing.cpp.i
-.PHONY : src/image_processing.cpp.i
+src/first_mission.cpp.i:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/first_mission.dir/build.make gabut/CMakeFiles/first_mission.dir/src/first_mission.cpp.i
+.PHONY : src/first_mission.cpp.i
 
-src/image_processing.s: src/image_processing.cpp.s
+src/first_mission.s: src/first_mission.cpp.s
 
-.PHONY : src/image_processing.s
+.PHONY : src/first_mission.s
 
 # target to generate assembly for a file
-src/image_processing.cpp.s:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/image_processing.dir/build.make gabut/CMakeFiles/image_processing.dir/src/image_processing.cpp.s
-.PHONY : src/image_processing.cpp.s
+src/first_mission.cpp.s:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/first_mission.dir/build.make gabut/CMakeFiles/first_mission.dir/src/first_mission.cpp.s
+.PHONY : src/first_mission.cpp.s
 
 src/rov_remote.o: src/rov_remote.cpp.o
 
@@ -875,6 +890,33 @@ src/rov_remote.s: src/rov_remote.cpp.s
 src/rov_remote.cpp.s:
 	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/rov_remote.dir/build.make gabut/CMakeFiles/rov_remote.dir/src/rov_remote.cpp.s
 .PHONY : src/rov_remote.cpp.s
+
+src/second_mission.o: src/second_mission.cpp.o
+
+.PHONY : src/second_mission.o
+
+# target to build an object file
+src/second_mission.cpp.o:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/second_mission.dir/build.make gabut/CMakeFiles/second_mission.dir/src/second_mission.cpp.o
+.PHONY : src/second_mission.cpp.o
+
+src/second_mission.i: src/second_mission.cpp.i
+
+.PHONY : src/second_mission.i
+
+# target to preprocess a source file
+src/second_mission.cpp.i:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/second_mission.dir/build.make gabut/CMakeFiles/second_mission.dir/src/second_mission.cpp.i
+.PHONY : src/second_mission.cpp.i
+
+src/second_mission.s: src/second_mission.cpp.s
+
+.PHONY : src/second_mission.s
+
+# target to generate assembly for a file
+src/second_mission.cpp.s:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/second_mission.dir/build.make gabut/CMakeFiles/second_mission.dir/src/second_mission.cpp.s
+.PHONY : src/second_mission.cpp.s
 
 src/video_mini.o: src/video_mini.cpp.o
 
@@ -939,6 +981,7 @@ help:
 	@echo "... list_install_components"
 	@echo "... install"
 	@echo "... rebuild_cache"
+	@echo "... edit_cache"
 	@echo "... gabut_generate_messages_nodejs"
 	@echo "... mavros_msgs_generate_messages_py"
 	@echo "... install/strip"
@@ -963,14 +1006,12 @@ help:
 	@echo "... geographic_msgs_generate_messages_lisp"
 	@echo "... mavros_msgs_generate_messages_nodejs"
 	@echo "... geometry_msgs_generate_messages_eus"
-	@echo "... image_processing"
 	@echo "... uuid_msgs_generate_messages_cpp"
 	@echo "... rov_remote"
 	@echo "... geometry_msgs_generate_messages_lisp"
 	@echo "... uuid_msgs_generate_messages_nodejs"
 	@echo "... uuid_msgs_generate_messages_lisp"
 	@echo "... uuid_msgs_generate_messages_py"
-	@echo "... edit_cache"
 	@echo "... geometry_msgs_generate_messages_nodejs"
 	@echo "... gabut_generate_messages"
 	@echo "... _gabut_generate_messages_check_deps_number_rc"
@@ -981,6 +1022,8 @@ help:
 	@echo "... gabut_genpy"
 	@echo "... geographic_msgs_generate_messages_eus"
 	@echo "... video_mini"
+	@echo "... first_mission"
+	@echo "... second_mission"
 	@echo "... controller"
 	@echo "... install/local"
 	@echo "... geometry_msgs_generate_messages_cpp"
@@ -988,12 +1031,15 @@ help:
 	@echo "... src/controller.o"
 	@echo "... src/controller.i"
 	@echo "... src/controller.s"
-	@echo "... src/image_processing.o"
-	@echo "... src/image_processing.i"
-	@echo "... src/image_processing.s"
+	@echo "... src/first_mission.o"
+	@echo "... src/first_mission.i"
+	@echo "... src/first_mission.s"
 	@echo "... src/rov_remote.o"
 	@echo "... src/rov_remote.i"
 	@echo "... src/rov_remote.s"
+	@echo "... src/second_mission.o"
+	@echo "... src/second_mission.i"
+	@echo "... src/second_mission.s"
 	@echo "... src/video_mini.o"
 	@echo "... src/video_mini.i"
 	@echo "... src/video_mini.s"

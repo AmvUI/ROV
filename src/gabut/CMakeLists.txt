@@ -171,8 +171,14 @@ ${catkin_LIBRARIES}
 ${OpenCV_LIBRARIES}
 )
 
-add_executable(image_processing src/image_processing.cpp )
-target_link_libraries(image_processing
+add_executable(first_mission src/first_mission.cpp )
+target_link_libraries(first_mission
+${catkin_LIBRARIES}
+${OpenCV_LIBRARIES}
+)
+
+add_executable(second_mission src/second_mission.cpp )
+target_link_libraries(second_mission
 ${catkin_LIBRARIES}
 ${OpenCV_LIBRARIES}
 )

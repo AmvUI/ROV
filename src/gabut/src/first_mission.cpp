@@ -28,8 +28,8 @@ void rovCallback(const sensor_msgs::CompressedImageConstPtr& msg)
   {
     rov_image = cv::imdecode(cv::Mat(msg->data),1);//convert compressed image data to cv::Mat
     waitKey(10);
-    //firstMissionProcessing(rov_image);
-    secondMissionProcessing(rov_image);
+    firstMissionProcessing(rov_image);
+    //secondMissionProcessing(rov_image);
     //thirdMissionProcessing(rov_image);
   }
   catch (cv_bridge::Exception& e)
@@ -200,11 +200,11 @@ void firstMissionProcessing(Mat input_image){
 	
 	pub_state_camera.publish(image);
 	
-	imshow("first_th_Red", imgThresholded_red);
-	imshow("first_th_blue", imgThresholded_blue);
+	//imshow("first_th_Red", imgThresholded_red);
+	//imshow("first_th_blue", imgThresholded_blue);
 	
-	imshow("fisrt_Red", imgDebug_red);
-	imshow("first_blue", imgDebug_blue);
+	//imshow("fisrt_Red", imgDebug_red);
+	//imshow("first_blue", imgDebug_blue);
 	
 	imshow("first", first_all);
 }
@@ -294,8 +294,8 @@ void secondMissionProcessing(Mat input_image){
 	putText(Original, square_text, Point(square_x_text, square_y_text), FONT_HERSHEY_DUPLEX, 2, Scalar(0,255,255), 2);
 	putText(Original, tri_text, Point(tri_x_text, tri_y_text), FONT_HERSHEY_DUPLEX, 2, Scalar(0,255,255), 2);
 
-	imshow("second colour", Threshold);
-	imshow("second contour", BW);
+	//imshow("second colour", Threshold);
+	//imshow("second contour", BW);
 	imshow("second", Original);
 }
 
