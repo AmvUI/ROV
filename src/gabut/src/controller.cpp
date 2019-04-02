@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <sensor_msgs/Joy.h>
 #include "gabut/number_rc.h"
-#include "gabut/image_process.h"
+#include "gabut/image_value.h"
 #include "pid/plant_msg.h"
 #include "pid/controller_msg.h"
 #include "pid/pid_const_msg.h"
@@ -31,8 +31,9 @@ pid::pid_const_msg pid_const;
 int state_red;
 int state_blue;
 int control_effort;
+int autoSteering;
 
-void image_process_cb(const gabut::image_process& image);
+void image_process_cb(const gabut::image_value& image);
 void pid_receiver_cb(const pid::controller_msg& control);
 void joyCallback(const sensor_msgs::Joy::ConstPtr& joy);
 void control_cb (const gabut::number_rc& msg);
@@ -51,7 +52,7 @@ int main(int argc, char** argv){
 	pub_pid_const 	= nh.advertise<pid::pid_const_msg>("/mate/pid/const", 1,true);
 
 	ros::Subscriber sub_pid_x_out 		= nh.subscribe("/mate/pid/out", 10, pid_receiver_cb );
-	ros::Subscriber sub_image_process 	= nh.subscribe("/mate/image/process", 1, image_process_cb);
+	ros::Subscriber sub_image_process 	= nh.subscribe("/mate/value/image", 1, image_process_cb);
 	ros::Subscriber joy_sub 			= nh.subscribe<sensor_msgs::Joy>("joy", 8, &joyCallback);
 	ros::Subscriber sub_mode_rc 		= nh.subscribe("/mate/rov/number", 1, &control_cb);
 	ros::ServiceClient client 			= nh.serviceClient<mavros_msgs::SetMode>("/mavros/set_mode");
@@ -159,8 +160,13 @@ void joyCallback(const sensor_msgs::Joy::ConstPtr& joy){
 		rovRcIn.channels[SERVO2] = pwmServo;
 		pub_override_rc.publish(rovRcIn);		
 	}	
+}
+
+void image_process_cb(const gabut::image_value& image){
+	state_red 		= image.state_red;
+	state_blue 		= image.state_blue;
 	
-	else if(mode==1){//mode auto	
+	if(mode==1){//mode auto	
 		for(int i=0; i < 8; i++) rovRcIn.channels[i] = 0;	//Releases all Channels First
 		
 		rovRcIn.channels[MOTOR1] = autoStabil;
@@ -178,13 +184,20 @@ void joyCallback(const sensor_msgs::Joy::ConstPtr& joy){
 		if(state_blue > 0){
 			mode==3;
 		}
+		
+		autoSteering = middleSteering - control_effort;
+		
 		if(state_red==0){rovRcIn.channels[STEERING_PIN] = middleSteering;}
-		else{rovRcIn.channels[STEERING_PIN] = middleSteering - control_effort;}
+		else if(autoSteering >= maxSteering){rovRcIn.channels[STEERING_PIN] = maxSteering;}
+		else if(autoSteering <= minSteering){rovRcIn.channels[STEERING_PIN] = minSteering;}
+		else{rovRcIn.channels[STEERING_PIN] = autoSteering;}
+		
 		rovRcIn.channels[THROTTLE_PIN] = autoThrottle;
 		
+		//cout<<"1"<<endl;
 		pub_override_rc.publish(rovRcIn);		
 	}
-	if(mode==3){//mode blue	
+	else if(mode==3){//mode blue	
 		for(int i=0; i < 8; i++) rovRcIn.channels[i] = 0;	//Releases all Channels First
 		
 		rovRcIn.channels[MOTOR1] = autoStabil;
@@ -226,11 +239,6 @@ void joyCallback(const sensor_msgs::Joy::ConstPtr& joy){
 		mode == 2;
 		ros::spinOnce();			
 	}	
-}
-
-void image_process_cb(const gabut::image_process& image){
-	state_red 		= image.state_red;
-	state_blue 		= image.state_blue;
 }
 
 void checkController(){	

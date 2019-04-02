@@ -1,10 +1,10 @@
 
 "use strict";
 
-let image_process = require('./image_process.js');
+let image_value = require('./image_value.js');
 let number_rc = require('./number_rc.js');
 
 module.exports = {
-  image_process: image_process,
+  image_value: image_value,
   number_rc: number_rc,
 };

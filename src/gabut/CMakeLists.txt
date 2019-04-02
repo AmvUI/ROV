@@ -56,7 +56,6 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x")
 add_message_files(
 	FILES
 	number_rc.msg
-	image_process.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -188,11 +187,6 @@ target_link_libraries(controller
 ${catkin_LIBRARIES}
 )
 
-add_executable(image_pilot src/image_pilot.cpp )
-target_link_libraries(image_pilot
-${catkin_LIBRARIES}
-${OpenCV_LIBRARIES}
-)
 #############
 ## Install ##
 #############

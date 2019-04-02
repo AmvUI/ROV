@@ -1,0 +1,33 @@
+<launch>
+	<arg name="pid_rate" default="100" />
+	<arg name="kp" default="0" />
+	<arg name="ki" default="0" />
+	<arg name="kd" default="0" />
+	<arg name="upper_limit" default="2000" />
+	<arg name="lower_limit" default="-2000" />
+	<arg name="anti_windup" default="0.1" />
+	<arg name="topic_pid_in" default="/mate/pid/in" />
+	<arg name="topic_pid_out" default="/mate/pid/out" />
+
+	<node name="control" pkg="pid" output="screen" type="controller_adaptive" args="$(arg kp) $(arg ki) $(arg kd) $(arg pid_rate) -tfp $(arg topic_pid_in) -tfc $(arg topic_pid_out) -ul $(arg upper_limit) -ll $(arg lower_limit) -aw $(arg anti_windup)" />
+	<node name="video_rov" pkg="gabut" output="screen" type="video_rov" />
+	<node name="video_mini" pkg="gabut" output="screen" type="video_mini" />
+	<node name="controller" pkg="gabut" output="screen" type="controller" />
+	<node name="image_processing" pkg="gabut" output="screen" type="image_processing" />
+	<node name="rov_remote" pkg="gabut" output="screen" type="rov_remote" />
+	
+	<node respawn="true" pkg="joy" type="joy_node" name="turtle_joy" >
+		<param name="dev" type="string" value="/dev/input/js0" />
+		<param name="deadzone" value="0.12" />
+	</node>
+		<node pkg="rosserial_python" type="serial_node.py" name="serial_node_1">
+		<param name="port" value="/dev/ttyACM1"/>
+		<!--param name="baud" value="57600"-->
+	</node>
+	<node pkg="rosserial_python" type="serial_node.py" name="serial_node_2">
+		<param name="port" value="/dev/ttyACM2"/>
+		<!--param name="baud" value="57600"-->
+	</node>
+
+</launch>
+

@@ -1,8 +1,8 @@
 (cl:defpackage gabut-msg
   (:use )
   (:export
-   "<IMAGE_PROCESS>"
-   "IMAGE_PROCESS"
+   "<IMAGE_VALUE>"
+   "IMAGE_VALUE"
    "<NUMBER_RC>"
    "NUMBER_RC"
   ))

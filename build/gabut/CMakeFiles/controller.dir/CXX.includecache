@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/mfikih15/Documents/ROV/devel/include/gabut/image_process.h
+/home/mfikih15/Documents/ROV/devel/include/gabut/image_value.h
 string
 -
 vector
@@ -113,8 +113,8 @@ sensor_msgs/Joy.h
 -
 gabut/number_rc.h
 /home/mfikih15/Documents/ROV/src/gabut/src/gabut/number_rc.h
-gabut/image_process.h
-/home/mfikih15/Documents/ROV/src/gabut/src/gabut/image_process.h
+gabut/image_value.h
+/home/mfikih15/Documents/ROV/src/gabut/src/gabut/image_value.h
 pid/plant_msg.h
 /home/mfikih15/Documents/ROV/src/gabut/src/pid/plant_msg.h
 pid/controller_msg.h

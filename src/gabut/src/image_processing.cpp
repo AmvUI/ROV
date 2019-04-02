@@ -6,7 +6,8 @@
 #include <cv_bridge/cv_bridge.h>
 #include <iostream>
 #include <stdio.h>
-#include "gabut/image_process.h"
+#include "gabut/image_value.h"
+#include <string> 
 
 using namespace std;
 using namespace cv;
@@ -18,7 +19,7 @@ void secondMissionProcessing(Mat input_image);
 void thirdMissionProcessing(Mat input_image);
 void miniProcessing(Mat input_image);
 
-gabut::image_process image;
+gabut::image_value image;
 ros::Publisher pub_state_camera;
 
 void rovCallback(const sensor_msgs::CompressedImageConstPtr& msg)
@@ -27,7 +28,7 @@ void rovCallback(const sensor_msgs::CompressedImageConstPtr& msg)
   {
     rov_image = cv::imdecode(cv::Mat(msg->data),1);//convert compressed image data to cv::Mat
     waitKey(10);
-    firstMissionProcessing(rov_image);
+    //firstMissionProcessing(rov_image);
     secondMissionProcessing(rov_image);
     //thirdMissionProcessing(rov_image);
   }
@@ -37,7 +38,6 @@ void rovCallback(const sensor_msgs::CompressedImageConstPtr& msg)
   }
 }
 
-/*
 void miniCallback(const sensor_msgs::CompressedImageConstPtr& msg)
 {
   try
@@ -51,7 +51,7 @@ void miniCallback(const sensor_msgs::CompressedImageConstPtr& msg)
     ROS_ERROR("Could not convert to image!");
   }
 }
-*/
+
 int main(int argc, char **argv){
 	ros::init(argc, argv, "videoRec");
 	ros::NodeHandle nh;
@@ -59,9 +59,9 @@ int main(int argc, char **argv){
 	
 	image_transport::ImageTransport it(nh);
 	
-	pub_state_camera 			= nh.advertise<gabut::image_process>("/mate/image/process", 1);
+	pub_state_camera 			= nh.advertise<gabut::image_value>("/mate/value/image", 1);
 	ros::Subscriber sub_rov 	= nh.subscribe("/mate/image/rov/compressed", 1, rovCallback);
-	//ros::Subscriber sub_mini 	= nh.subscribe("/mate/image/mini/compressed", 1, miniCallback);
+	ros::Subscriber sub_mini 	= nh.subscribe("/mate/image/mini/compressed", 1, miniCallback);
 	
 	namedWindow("panel", CV_WINDOW_AUTOSIZE);
 	
@@ -186,8 +186,8 @@ void firstMissionProcessing(Mat input_image){
 	line( first_all, Point( state_red, 0 ), Point( state_red, input_height), Scalar( 150, 150, 150 ), 2, 8 );
 	
 	//blue state
-	line( first_all, Point( blue_setpoint, 0 ), Point( blue_setpoint, input_height), Scalar( 50, 50, 50 ), 2, 8 );
-	line( first_all, Point( state_blue, 0 ), Point( state_blue, input_height), Scalar( 150, 150, 150 ), 2, 8 );
+	line( first_all, Point( blue_setpoint, 0 ), Point( blue_setpoint, input_height), Scalar( 200, 200, 200 ), 2, 8 );
+	line( first_all, Point( state_blue, 0 ), Point( state_blue, input_height), Scalar( 100, 100, 100 ), 2, 8 );
 	
 	//roi
 	line( first_all, Point( x_init, y_init ), Point( x_init+original_width, y_init), Scalar( 100, 100, 100 ), 2, 8 );
@@ -197,7 +197,6 @@ void firstMissionProcessing(Mat input_image){
 	
 	image.state_red 	= state_red;
 	image.state_blue 	= state_blue;
-	image.blue_crack 	= mu_blue.m10;
 	
 	pub_state_camera.publish(image);
 	
@@ -269,29 +268,32 @@ void secondMissionProcessing(Mat input_image){
 		count_circle++;
 	}
 	
-	line( Original, Point( strip_x, strip_y1 ), Point( strip_x, strip_y2), Scalar( 50, 50, 50 ), 2, 8 );	
-	circle( Original, Point(circle_x, circle_y), 10, Scalar( 0, 255, 255 ), 2);
-	rectangle(Original,Rect(square_x,square_y,100,100),Scalar(0,255,255),3,8,0);
-	line( Original, Point( tri_x1, tri_y1 ), Point( tri_x2, tri_y2), Scalar( 150, 150, 150 ), 2, 8 );
-	line( Original, Point( tri_x2, tri_y2 ), Point( tri_x3, tri_y3), Scalar( 150, 150, 150 ), 2, 8 );	
-	line( Original, Point( tri_x3, tri_y3 ), Point( tri_x1, tri_y1), Scalar( 150, 150, 150 ), 2, 8 );	
+	line( Original, Point( strip_x, strip_y1 ), Point( strip_x, strip_y2), Scalar( 0, 255, 255 ), 5, 8 );	
 	
+	circle( Original, Point(circle_x, circle_y), 30, Scalar( 0, 255, 255 ), 2);
 	
-	stringstream ss; 
-	ss << count_square;
-	square_text = ss.str();
-	ss << count_triangle;
-	tri_text = ss.str();
-	ss << count_circle;
-	circle_text = ss.str();
-	ss << count_strip;
-	strip_text = ss.str();
+	rectangle(Original,Rect(square_x,square_y,50,50),Scalar(0,255,255),3,8,0);
 	
-	putText(Original, square_text, Point(square_x_text, square_y_text), FONT_HERSHEY_DUPLEX, 1, Scalar(0,255,255), 2);
-	putText(Original, circle_text, Point(circle_x_text, circle_y_text), FONT_HERSHEY_DUPLEX, 1, Scalar(0,255,255), 2);
-	putText(Original, tri_text, Point(tri_x_text, tri_y_text), FONT_HERSHEY_DUPLEX, 1, Scalar(0,255,255), 2);
-	putText(Original, strip_text, Point(strip_x_text, strip_y_text), FONT_HERSHEY_DUPLEX, 1, Scalar(0,255,255), 2);
+	line( Original, Point( tri_x1, tri_y1 ), Point( tri_x2, tri_y2), Scalar( 0, 255, 255 ), 2, 8 );
+	line( Original, Point( tri_x2, tri_y2 ), Point( tri_x3, tri_y3), Scalar( 0, 255, 255 ), 2, 8 );	
+	line( Original, Point( tri_x3, tri_y3 ), Point( tri_x1, tri_y1), Scalar( 0, 255, 255 ), 2, 8 );	
 	
+	//cout<<count_circle<<endl;
+	string strip_text="0";
+	string circle_text="0";
+	string square_text="0";
+	string tri_text="0";
+	
+	//square_text = to_string(count_square);
+	//strip_text = to_string(count_strip);
+	//tri_text = to_string(count_triangle);
+	//circle_text = to_string(count_circle);
+	
+	putText(Original, strip_text, Point(strip_x_text, strip_y_text), FONT_HERSHEY_DUPLEX, 2, Scalar(0,255,255), 2);
+	putText(Original, circle_text, Point(circle_x_text, circle_y_text), FONT_HERSHEY_DUPLEX, 2, Scalar(0,255,255), 2);
+	putText(Original, square_text, Point(square_x_text, square_y_text), FONT_HERSHEY_DUPLEX, 2, Scalar(0,255,255), 2);
+	putText(Original, tri_text, Point(tri_x_text, tri_y_text), FONT_HERSHEY_DUPLEX, 2, Scalar(0,255,255), 2);
+
 	imshow("second colour", Threshold);
 	imshow("second contour", BW);
 	imshow("second", Original);

@@ -1479,19 +1479,6 @@ rosserial_server_socket_node/fast:
 .PHONY : rosserial_server_socket_node/fast
 
 #=============================================================================
-# Target rules for targets named _gabut_generate_messages_check_deps_image_process
-
-# Build rule for target.
-_gabut_generate_messages_check_deps_image_process: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _gabut_generate_messages_check_deps_image_process
-.PHONY : _gabut_generate_messages_check_deps_image_process
-
-# fast build rule for target.
-_gabut_generate_messages_check_deps_image_process/fast:
-	$(MAKE) -f gabut/CMakeFiles/_gabut_generate_messages_check_deps_image_process.dir/build.make gabut/CMakeFiles/_gabut_generate_messages_check_deps_image_process.dir/build
-.PHONY : _gabut_generate_messages_check_deps_image_process/fast
-
-#=============================================================================
 # Target rules for targets named gabut_generate_messages_nodejs
 
 # Build rule for target.
@@ -1555,19 +1542,6 @@ sensor_msgs_generate_messages_nodejs: cmake_check_build_system
 sensor_msgs_generate_messages_nodejs/fast:
 	$(MAKE) -f gabut/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make gabut/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
 .PHONY : sensor_msgs_generate_messages_nodejs/fast
-
-#=============================================================================
-# Target rules for targets named geometry_msgs_generate_messages_cpp
-
-# Build rule for target.
-geometry_msgs_generate_messages_cpp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 geometry_msgs_generate_messages_cpp
-.PHONY : geometry_msgs_generate_messages_cpp
-
-# fast build rule for target.
-geometry_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f gabut/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make gabut/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
-.PHONY : geometry_msgs_generate_messages_cpp/fast
 
 #=============================================================================
 # Target rules for targets named gabut_geneus
@@ -1869,19 +1843,6 @@ uuid_msgs_generate_messages_nodejs/fast:
 .PHONY : uuid_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
-# Target rules for targets named image_pilot
-
-# Build rule for target.
-image_pilot: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 image_pilot
-.PHONY : image_pilot
-
-# fast build rule for target.
-image_pilot/fast:
-	$(MAKE) -f gabut/CMakeFiles/image_pilot.dir/build.make gabut/CMakeFiles/image_pilot.dir/build
-.PHONY : image_pilot/fast
-
-#=============================================================================
 # Target rules for targets named uuid_msgs_generate_messages_lisp
 
 # Build rule for target.
@@ -2049,6 +2010,19 @@ controller: cmake_check_build_system
 controller/fast:
 	$(MAKE) -f gabut/CMakeFiles/controller.dir/build.make gabut/CMakeFiles/controller.dir/build
 .PHONY : controller/fast
+
+#=============================================================================
+# Target rules for targets named geometry_msgs_generate_messages_cpp
+
+# Build rule for target.
+geometry_msgs_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 geometry_msgs_generate_messages_cpp
+.PHONY : geometry_msgs_generate_messages_cpp
+
+# fast build rule for target.
+geometry_msgs_generate_messages_cpp/fast:
+	$(MAKE) -f gabut/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make gabut/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
+.PHONY : geometry_msgs_generate_messages_cpp/fast
 
 #=============================================================================
 # Target rules for targets named run_tests_rosserial_test_rostest_test_rosserial_python_socket.test
@@ -2463,13 +2437,11 @@ help:
 	@echo "... topic_tools_generate_messages_cpp"
 	@echo "... rosserial_server_serial_node"
 	@echo "... rosserial_server_socket_node"
-	@echo "... _gabut_generate_messages_check_deps_image_process"
 	@echo "... gabut_generate_messages_nodejs"
 	@echo "... mavros_msgs_generate_messages_py"
 	@echo "... uuid_msgs_generate_messages_eus"
 	@echo "... gabut_gennodejs"
 	@echo "... sensor_msgs_generate_messages_nodejs"
-	@echo "... geometry_msgs_generate_messages_cpp"
 	@echo "... gabut_geneus"
 	@echo "... mavros_msgs_generate_messages_cpp"
 	@echo "... sensor_msgs_generate_messages_py"
@@ -2493,7 +2465,6 @@ help:
 	@echo "... rov_remote"
 	@echo "... geometry_msgs_generate_messages_lisp"
 	@echo "... uuid_msgs_generate_messages_nodejs"
-	@echo "... image_pilot"
 	@echo "... uuid_msgs_generate_messages_lisp"
 	@echo "... uuid_msgs_generate_messages_py"
 	@echo "... geometry_msgs_generate_messages_nodejs"
@@ -2507,6 +2478,7 @@ help:
 	@echo "... geographic_msgs_generate_messages_eus"
 	@echo "... video_mini"
 	@echo "... controller"
+	@echo "... geometry_msgs_generate_messages_cpp"
 	@echo "... run_tests_rosserial_test_rostest_test_rosserial_python_socket.test"
 	@echo "... _run_tests_rosserial_test_rostest_test_rosserial_server_serial.test"
 	@echo "... run_tests_rosserial_test"

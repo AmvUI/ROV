@@ -5,8 +5,8 @@
 
 using namespace std;
 
-float kp = 1.65;//1.5
-float ki = 1;//1
+float kp = 1.2;//1.5
+float ki = 0.2;//1
 float kd = 0.5;//0.5
 
 float update_time=0.01;
@@ -42,7 +42,7 @@ int camera_mini = 1;
 
 #define autoStabil 		1520
 #define autoMotor		1520
-#define autoThrottle	1520
+#define autoThrottle	1700
 
 float pwmServo =	1500;
 float maxServo =	1900;
@@ -55,8 +55,8 @@ int manual_number =2;
 int auto_number =1;
 
 int x_init=0;
-int y_init=180;
-int width=280; //width 400 for simple
+int y_init=240;
+int width=640; //width 400 for simple
 int height=180;
 							//nuc  pc
 int LowH_red 	= 0; 		//0  
@@ -67,12 +67,12 @@ int LowV_red 	= 49;		//49   242
 int HighV_red 	= 230;		//230  255
 int Noise_red 	= 15;
 
-int LowH_blue 	= 0; 		//0  
-int HighH_blue 	= 184;		//184 
-int LowS_blue 	= 130;      //130  65
-int HighS_blue 	= 248;      //248  246
-int LowV_blue 	= 49;		//49   242
-int HighV_blue 	= 230;		//230  255
+int LowH_blue 	= 88; 		//0  
+int HighH_blue 	= 170;		//184 
+int LowS_blue 	= 40;      //130  65
+int HighS_blue 	= 197;      //248  246
+int LowV_blue 	= 34;		//49   242
+int HighV_blue 	= 133;		//230  255
 int Noise_blue 	= 15;
 
 int LowH_black 	= 0; 		//0  
@@ -81,39 +81,34 @@ int LowS_black	= 130;      //130  65
 int HighS_black = 248;      //248  246
 int LowV_black	= 49;		//49   242
 int HighV_black = 230;		//230  255
-int Noise_black = 15;
-int min_radius_black=10;
-int max_radius_black=15;
+int Noise_black = 50;
+int min_radius_black=100;
+int max_radius_black=150;
 
 int red_setpoint = 320;
 int blue_setpoint = 320;
 
-int strip_x 	= 100;
-int strip_y1 	= 100;
-int strip_y2	= 150;
-int circle_x 	= 100;
-int circle_y	= 100;
-int square_x	= 200;
-int square_y 	= 200;
-int tri_x1 		= 100;
-int tri_x2		= 150;
-int tri_x3 		= 300;
-int tri_y1		= 230;
-int tri_y2		= 320;
-int tri_y3		= 260;
+int strip_x 	= 500;
+int strip_y1 	= 50;
+int strip_y2	= 100;
+int circle_x 	= 500;
+int circle_y	= 180;
+int square_x	= 480;
+int square_y 	= 250;
+int tri_x1 		= 500;
+int tri_y1		= 350;
+int tri_x2		= 530;
+int tri_y2		= 400;
+int tri_x3 		= 470;
+int tri_y3		= 400;
 
-int tri_x_text =  100;
-int tri_y_text = 100;
-int square_x_text = 200;
-int square_y_text = 200;
-int circle_x_text = 300;
-int circle_y_text = 300;
-int strip_x_text = 400;
-int strip_y_text = 400;
-
-string strip_text;
-string circle_text;
-string square_text;
-string tri_text;
+int strip_x_text = 550;
+int strip_y_text = 100;
+int circle_x_text = 550;
+int circle_y_text = 200;
+int square_x_text = 550;
+int square_y_text = 300;
+int tri_x_text =  550;
+int tri_y_text = 400;
 
 int thickness = 2;

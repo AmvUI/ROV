@@ -89,17 +89,6 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
@@ -111,16 +100,16 @@ install/strip/fast: install/strip
 
 .PHONY : install/strip/fast
 
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
 
-# Special rule for the target test
-test/fast: test
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
 
-.PHONY : test/fast
+.PHONY : edit_cache/fast
 
 # Special rule for the target install/local
 install/local: preinstall
@@ -132,6 +121,17 @@ install/local: preinstall
 install/local/fast: install/local
 
 .PHONY : install/local/fast
+
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -164,21 +164,6 @@ preinstall/fast:
 depend:
 	cd /home/mfikih15/Documents/ROV/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
-
-# Convenience name for target.
-gabut/CMakeFiles/_gabut_generate_messages_check_deps_image_process.dir/rule:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/_gabut_generate_messages_check_deps_image_process.dir/rule
-.PHONY : gabut/CMakeFiles/_gabut_generate_messages_check_deps_image_process.dir/rule
-
-# Convenience name for target.
-_gabut_generate_messages_check_deps_image_process: gabut/CMakeFiles/_gabut_generate_messages_check_deps_image_process.dir/rule
-
-.PHONY : _gabut_generate_messages_check_deps_image_process
-
-# fast build rule for target.
-_gabut_generate_messages_check_deps_image_process/fast:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/_gabut_generate_messages_check_deps_image_process.dir/build.make gabut/CMakeFiles/_gabut_generate_messages_check_deps_image_process.dir/build
-.PHONY : _gabut_generate_messages_check_deps_image_process/fast
 
 # Convenience name for target.
 gabut/CMakeFiles/gabut_generate_messages_nodejs.dir/rule:
@@ -254,21 +239,6 @@ sensor_msgs_generate_messages_nodejs: gabut/CMakeFiles/sensor_msgs_generate_mess
 sensor_msgs_generate_messages_nodejs/fast:
 	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make gabut/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
 .PHONY : sensor_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-gabut/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
-.PHONY : gabut/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-geometry_msgs_generate_messages_cpp: gabut/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : geometry_msgs_generate_messages_cpp
-
-# fast build rule for target.
-geometry_msgs_generate_messages_cpp/fast:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make gabut/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
-.PHONY : geometry_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 gabut/CMakeFiles/gabut_geneus.dir/rule:
@@ -616,21 +586,6 @@ uuid_msgs_generate_messages_nodejs/fast:
 .PHONY : uuid_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
-gabut/CMakeFiles/image_pilot.dir/rule:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/image_pilot.dir/rule
-.PHONY : gabut/CMakeFiles/image_pilot.dir/rule
-
-# Convenience name for target.
-image_pilot: gabut/CMakeFiles/image_pilot.dir/rule
-
-.PHONY : image_pilot
-
-# fast build rule for target.
-image_pilot/fast:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/image_pilot.dir/build.make gabut/CMakeFiles/image_pilot.dir/build
-.PHONY : image_pilot/fast
-
-# Convenience name for target.
 gabut/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/rule:
 	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/rule
 .PHONY : gabut/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/rule
@@ -825,6 +780,21 @@ controller/fast:
 	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/controller.dir/build.make gabut/CMakeFiles/controller.dir/build
 .PHONY : controller/fast
 
+# Convenience name for target.
+gabut/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f CMakeFiles/Makefile2 gabut/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+.PHONY : gabut/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+geometry_msgs_generate_messages_cpp: gabut/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : geometry_msgs_generate_messages_cpp
+
+# fast build rule for target.
+geometry_msgs_generate_messages_cpp/fast:
+	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make gabut/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
+.PHONY : geometry_msgs_generate_messages_cpp/fast
+
 src/controller.o: src/controller.cpp.o
 
 .PHONY : src/controller.o
@@ -851,33 +821,6 @@ src/controller.s: src/controller.cpp.s
 src/controller.cpp.s:
 	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/controller.dir/build.make gabut/CMakeFiles/controller.dir/src/controller.cpp.s
 .PHONY : src/controller.cpp.s
-
-src/image_pilot.o: src/image_pilot.cpp.o
-
-.PHONY : src/image_pilot.o
-
-# target to build an object file
-src/image_pilot.cpp.o:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/image_pilot.dir/build.make gabut/CMakeFiles/image_pilot.dir/src/image_pilot.cpp.o
-.PHONY : src/image_pilot.cpp.o
-
-src/image_pilot.i: src/image_pilot.cpp.i
-
-.PHONY : src/image_pilot.i
-
-# target to preprocess a source file
-src/image_pilot.cpp.i:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/image_pilot.dir/build.make gabut/CMakeFiles/image_pilot.dir/src/image_pilot.cpp.i
-.PHONY : src/image_pilot.cpp.i
-
-src/image_pilot.s: src/image_pilot.cpp.s
-
-.PHONY : src/image_pilot.s
-
-# target to generate assembly for a file
-src/image_pilot.cpp.s:
-	cd /home/mfikih15/Documents/ROV/build && $(MAKE) -f gabut/CMakeFiles/image_pilot.dir/build.make gabut/CMakeFiles/image_pilot.dir/src/image_pilot.cpp.s
-.PHONY : src/image_pilot.cpp.s
 
 src/image_processing.o: src/image_processing.cpp.o
 
@@ -996,16 +939,12 @@ help:
 	@echo "... list_install_components"
 	@echo "... install"
 	@echo "... rebuild_cache"
-	@echo "... edit_cache"
-	@echo "... _gabut_generate_messages_check_deps_image_process"
 	@echo "... gabut_generate_messages_nodejs"
 	@echo "... mavros_msgs_generate_messages_py"
 	@echo "... install/strip"
 	@echo "... uuid_msgs_generate_messages_eus"
 	@echo "... gabut_gennodejs"
 	@echo "... sensor_msgs_generate_messages_nodejs"
-	@echo "... test"
-	@echo "... geometry_msgs_generate_messages_cpp"
 	@echo "... gabut_geneus"
 	@echo "... mavros_msgs_generate_messages_cpp"
 	@echo "... sensor_msgs_generate_messages_py"
@@ -1029,9 +968,9 @@ help:
 	@echo "... rov_remote"
 	@echo "... geometry_msgs_generate_messages_lisp"
 	@echo "... uuid_msgs_generate_messages_nodejs"
-	@echo "... image_pilot"
 	@echo "... uuid_msgs_generate_messages_lisp"
 	@echo "... uuid_msgs_generate_messages_py"
+	@echo "... edit_cache"
 	@echo "... geometry_msgs_generate_messages_nodejs"
 	@echo "... gabut_generate_messages"
 	@echo "... _gabut_generate_messages_check_deps_number_rc"
@@ -1044,12 +983,11 @@ help:
 	@echo "... video_mini"
 	@echo "... controller"
 	@echo "... install/local"
+	@echo "... geometry_msgs_generate_messages_cpp"
+	@echo "... test"
 	@echo "... src/controller.o"
 	@echo "... src/controller.i"
 	@echo "... src/controller.s"
-	@echo "... src/image_pilot.o"
-	@echo "... src/image_pilot.i"
-	@echo "... src/image_pilot.s"
 	@echo "... src/image_processing.o"
 	@echo "... src/image_processing.i"
 	@echo "... src/image_processing.s"
