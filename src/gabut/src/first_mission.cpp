@@ -80,16 +80,6 @@ int main(int argc, char **argv){
 	createTrackbar("LowV_blue", "panel", &LowV_blue, 255);
 	createTrackbar("HighV_blue", "panel", &HighV_blue, 255);
 	createTrackbar("noise_blue", "panel", &Noise_blue, 255);
-	
-	createTrackbar("LowH_black", "panel", &LowH_black, 255);
-	createTrackbar("HighH_black", "panel", &HighH_black, 255);
-	createTrackbar("LowS_black", "panel", &LowS_black, 255); 
-	createTrackbar("HighS_black", "panel", &HighS_black, 255);
-	createTrackbar("LowV_black", "panel", &LowV_black, 255);
-	createTrackbar("HighV_black", "panel", &HighV_black, 255);
-	createTrackbar("noise_black", "panel", &Noise_black, 255);
-	createTrackbar("MaxRadius", "panel", &max_radius_black, 1000);
-	createTrackbar("MinRadius", "panel", &min_radius_black, 1000);
 
 	createTrackbar("x", "panel", &x_init, 700); //Hue (0 - 255)
 	createTrackbar("y", "panel", &y_init, 700);

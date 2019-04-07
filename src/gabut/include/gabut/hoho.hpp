@@ -24,10 +24,10 @@ int camera_mini = 1;
 #define SERVO1				5
 #define SERVO2				6
 
-#define maxStabil 		1720
-#define maxMotor 		1720
-#define maxSteering 	1720
-#define maxThrottle 	1720
+#define maxStabil 		1900
+#define maxMotor 		1900
+#define maxSteering 	1900
+#define maxThrottle 	1900
 
 
 #define minStabil 		1120

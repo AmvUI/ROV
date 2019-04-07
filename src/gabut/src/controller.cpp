@@ -129,8 +129,8 @@ void joyCallback(const sensor_msgs::Joy::ConstPtr& joy){
 		}
 	
 		//steering
-		if (steering > 0){rovRcIn.channels[STEERING_PIN] = maxSteering;}//right
-		else if (steering < 0){rovRcIn.channels[STEERING_PIN] = minSteering;}//left
+		if (steering < 0){rovRcIn.channels[STEERING_PIN] = maxSteering;}//right
+		else if (steering > 0){rovRcIn.channels[STEERING_PIN] = minSteering;}//left
 		else {rovRcIn.channels[STEERING_PIN] = middleSteering;}
 	
 		//throttle
