@@ -174,6 +174,7 @@ void image_process_cb(const gabut::image_value& image){
 		rovRcIn.channels[MOTOR3] = autoMotor;		
 		
 		rovRcIn.channels[SERVO1] = pwmServo;
+		rovRcIn.channels[SERVO2] = pwmServo;
 		
 		pid_in.x = state_red;
 		pid_in.t = pid_in.t+delta_t;
@@ -205,6 +206,7 @@ void image_process_cb(const gabut::image_value& image){
 		rovRcIn.channels[MOTOR3] = autoMotor;
 		
 		rovRcIn.channels[SERVO1] = pwmServo;
+		rovRcIn.channels[SERVO2] = pwmServo;
 		
 		//maju
 		rovRcIn.channels[STEERING_PIN] = middleSteering;
