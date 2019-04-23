@@ -15,7 +15,7 @@ using namespace std;
 
 int a, b, c, d, e, f;
 int g, h, i, j, k, l, m, n, o, p, q;
-int throttle, steering, sink, grip_high, grip_low;
+int throttle, steering, sink, grip_high, grip_low, trim, roll;
 
 int tempPwm;
 int mode;
@@ -102,9 +102,10 @@ void joyCallback(const sensor_msgs::Joy::ConstPtr& joy){
 	throttle 	= joy->axes[1];
 	steering 	= joy->axes[3];
 	sink 		= joy->axes[2];
+	trim 		= joy->axes[5];
+	roll		= joy->axes[4];	
 	grip_high 	= joy->buttons[5];
 	grip_low 	= joy->buttons[7];
-	
 	//checkController();
 	
 	if(mode==2){	
@@ -121,6 +122,27 @@ void joyCallback(const sensor_msgs::Joy::ConstPtr& joy){
 			rovRcIn.channels[MOTOR1] = maxStabil;
 			rovRcIn.channels[MOTOR2] = maxMotor;
 			rovRcIn.channels[MOTOR3] = maxMotor;
+		}
+		
+		else if (trim < 0){
+			rovRcIn.channels[MOTOR1] = minTrim;
+			rovRcIn.channels[MOTOR2] = maxTrim;
+			rovRcIn.channels[MOTOR3] = maxTrim;
+		}
+		else if (trim > 0){
+			rovRcIn.channels[MOTOR1] = maxTrim;
+			rovRcIn.channels[MOTOR2] = minTrim;
+			rovRcIn.channels[MOTOR3] = minTrim;
+		}
+		else if (roll < 0){//left
+			rovRcIn.channels[MOTOR1] = middleStabil;//middle
+			rovRcIn.channels[MOTOR2] = maxRoll;//right
+			rovRcIn.channels[MOTOR3] = minRoll;//left
+		}
+		else if (roll > 0){//right
+			rovRcIn.channels[MOTOR1] = middleStabil;
+			rovRcIn.channels[MOTOR2] = minRoll;
+			rovRcIn.channels[MOTOR3] = maxRoll;
 		}
 		else {
 			rovRcIn.channels[MOTOR1] = middleStabil;

@@ -24,6 +24,12 @@ int camera_mini = 1;
 #define SERVO1				5
 #define SERVO2				6
 
+#define minTrim 		1100
+#define maxTrim 		1700
+
+#define maxRoll			1700
+#define minRoll			1100
+
 #define maxStabil 		1900
 #define maxMotor 		1900
 #define maxSteering 	1900
@@ -111,4 +117,25 @@ int square_y_text = 300;
 int tri_x_text =  550;
 int tri_y_text = 400;
 
+string strip_text="2";
+string circle_text="2";
+string square_text="1";
+string tri_text="1";
+
 int thickness = 2;
+
+int ph_x = 20;
+int ph_y = 50;
+int heat_x = 20;
+int heat_y = 100;
+
+string ph_text = "Ph :";
+string heat_text = "Heat :";
+
+int ph_x_value = 100;
+int ph_y_value = 50;
+int heat_x_value = 120;
+int heat_y_value = 100;
+
+string ph_text_value = "7.2";
+string heat_text_value = "30";

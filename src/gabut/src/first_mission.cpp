@@ -29,8 +29,6 @@ void rovCallback(const sensor_msgs::CompressedImageConstPtr& msg)
     rov_image = cv::imdecode(cv::Mat(msg->data),1);//convert compressed image data to cv::Mat
     waitKey(10);
     firstMissionProcessing(rov_image);
-    //secondMissionProcessing(rov_image);
-    //thirdMissionProcessing(rov_image);
   }
   catch (cv_bridge::Exception& e)
   {
@@ -197,100 +195,6 @@ void firstMissionProcessing(Mat input_image){
 	//imshow("first_blue", imgDebug_blue);
 	
 	imshow("first", first_all);
-}
-
-void secondMissionProcessing(Mat input_image){
-	Mat Original = input_image.clone();
-	Mat imgHSV, allColour, allContour, Threshold, BW;
-	int Index;
-	cvtColor(Original, imgHSV, COLOR_BGR2HSV);
-			
-	erode(imgHSV, imgHSV, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) );
-	dilate( imgHSV, imgHSV, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) ); 
-
-	dilate( imgHSV, imgHSV, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) ); 
-	erode(imgHSV, imgHSV, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) );
-		
-	inRange(imgHSV, Scalar(LowH_black, LowS_black, LowV_black), Scalar(HighH_black, HighS_black, HighV_black), Threshold); //Threshold the image
-		
-	Canny(Threshold, BW, 0, 50, 5);
-		
-	vector<vector<Point> > Contours;
-		
-	findContours(BW, Contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
-			
-	vector<Point> Approx;
-	int count_triangle, count_square, count_strip, count_circle;
-	
-	for (Index = 0; Index < Contours.size(); Index++){
-		approxPolyDP(Mat(Contours[Index]), Approx, arcLength(Mat(Contours[Index]), true)*0.02, true);
-		
-		if (fabs(contourArea(Contours[Index])) < 5000 || !isContourConvex(Approx))
-		continue;
-
-		if (Approx.size() == 3){
-			count_triangle++;
-		}
-		
-		if (Approx.size() == 4){
-			Moments mu_black=moments(Threshold);
-			int area_black = mu_black.m00; // sum of zero'th moment is area
-			int posX_black = mu_black.m10/area_black; // center of mass = w*x/weight
-			int posY_black = mu_black.m01/area_black;// center of mass = w*y/high
-			area_black /= 255; // scale from bytes to pixels	
-			if(mu_black.m10<0.5*mu_black.m01){
-				count_strip++;
-			}
-			else{
-				count_square++;
-			}
-		}
-	}
-	
-	GaussianBlur(Threshold, Threshold, Size(9, 9), 2, 2);
-	
-	vector<Vec3f> circles;
-	HoughCircles(Threshold, circles, HOUGH_GRADIENT, 1,
-		Threshold.rows/16, 
-		100, 30, min_radius_black, max_radius_black);
-		
-	for (size_t i = 0; i < circles.size(); i++ ){
-		count_circle++;
-	}
-	
-	line( Original, Point( strip_x, strip_y1 ), Point( strip_x, strip_y2), Scalar( 0, 255, 255 ), 5, 8 );	
-	
-	circle( Original, Point(circle_x, circle_y), 30, Scalar( 0, 255, 255 ), 2);
-	
-	rectangle(Original,Rect(square_x,square_y,50,50),Scalar(0,255,255),3,8,0);
-	
-	line( Original, Point( tri_x1, tri_y1 ), Point( tri_x2, tri_y2), Scalar( 0, 255, 255 ), 2, 8 );
-	line( Original, Point( tri_x2, tri_y2 ), Point( tri_x3, tri_y3), Scalar( 0, 255, 255 ), 2, 8 );	
-	line( Original, Point( tri_x3, tri_y3 ), Point( tri_x1, tri_y1), Scalar( 0, 255, 255 ), 2, 8 );	
-	
-	//cout<<count_circle<<endl;
-	string strip_text="0";
-	string circle_text="0";
-	string square_text="0";
-	string tri_text="0";
-	
-	//square_text = to_string(count_square);
-	//strip_text = to_string(count_strip);
-	//tri_text = to_string(count_triangle);
-	//circle_text = to_string(count_circle);
-	
-	putText(Original, strip_text, Point(strip_x_text, strip_y_text), FONT_HERSHEY_DUPLEX, 2, Scalar(0,255,255), 2);
-	putText(Original, circle_text, Point(circle_x_text, circle_y_text), FONT_HERSHEY_DUPLEX, 2, Scalar(0,255,255), 2);
-	putText(Original, square_text, Point(square_x_text, square_y_text), FONT_HERSHEY_DUPLEX, 2, Scalar(0,255,255), 2);
-	putText(Original, tri_text, Point(tri_x_text, tri_y_text), FONT_HERSHEY_DUPLEX, 2, Scalar(0,255,255), 2);
-
-	//imshow("second colour", Threshold);
-	//imshow("second contour", BW);
-	imshow("second", Original);
-}
-
-void thirdMissionProcessing(Mat input_image){
-	imshow("third", input_image);
 }
 
 void miniProcessing(Mat input_image){

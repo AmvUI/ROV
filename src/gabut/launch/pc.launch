@@ -2,6 +2,7 @@
 	<node name="first_mission" pkg="gabut" output="screen" type="first_mission" />
 	<node name="second_mission" pkg="gabut" output="screen" type="second_mission" />
 	<node name="rov_remote" pkg="gabut" output="screen" type="rov_remote" />
+	<node name="controller" pkg="gabut" output="screen" type="controller" />
 	
 	<node respawn="true" pkg="joy" type="joy_node" name="turtle_joy" >
 		<param name="dev" type="string" value="/dev/input/js0" />

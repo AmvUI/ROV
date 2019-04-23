@@ -12,7 +12,6 @@
 	<node name="control" pkg="pid" output="screen" type="controller_adaptive" args="$(arg kp) $(arg ki) $(arg kd) $(arg pid_rate) -tfp $(arg topic_pid_in) -tfc $(arg topic_pid_out) -ul $(arg upper_limit) -ll $(arg lower_limit) -aw $(arg anti_windup)" />
 	<node name="video_rov" pkg="gabut" output="screen" type="video_rov" />
 	<node name="video_mini" pkg="gabut" output="screen" type="video_mini" />
-	<node name="controller" pkg="gabut" output="screen" type="controller" />
 	
 	<node pkg="rosserial_python" type="serial_node.py" name="serial_node_1">
 		<param name="port" value="/dev/ttyACM1"/>
