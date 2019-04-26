@@ -1,2 +1,0 @@
-gabut:pid
--DCATKIN_DEVEL_PREFIX=/home/nathan/ROV/devel -DCMAKE_INSTALL_PREFIX=/home/nathan/ROV/install -G Unix Makefiles

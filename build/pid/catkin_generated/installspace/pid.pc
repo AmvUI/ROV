@@ -1,8 +1,0 @@
-prefix=/home/nathan/ROV/install
-
-Name: pid
-Description: Description of pid
-Version: 0.0.7
-Cflags: -I/home/nathan/ROV/install/include
-Libs: -L/home/nathan/ROV/install/lib 
-Requires: roscpp std_msgs message_runtime
