@@ -7,7 +7,8 @@
 #include <iostream>
 #include <stdio.h>
 #include "gabut/image_value.h"
-#include <string> 
+#include <string>
+#include <sstream>
 
 using namespace std;
 using namespace cv;
@@ -100,6 +101,8 @@ void secondMissionProcessing(Mat input_image){
 		}
 		
 		if (Approx.size() == 4){
+			count_square++;
+			/**
 			Moments mu_black=moments(Threshold);
 			int area_black = mu_black.m00; // sum of zero'th moment is area
 			int posX_black = mu_black.m10/area_black; // center of mass = w*x/weight
@@ -111,6 +114,7 @@ void secondMissionProcessing(Mat input_image){
 			else{
 				count_square++;
 			}
+			*/
 		}
 	}
 	
@@ -136,11 +140,21 @@ void secondMissionProcessing(Mat input_image){
 	line( Original, Point( tri_x3, tri_y3 ), Point( tri_x1, tri_y1), Scalar( 0, 255, 255 ), 2, 8 );	
 	
 	//cout<<count_circle<<endl;
+	stringstream ss;
+	ss << count_square;
+	square_text = ss.str();
+
+	ss.str("");
+	ss << count_strip;
+	strip_text = ss.str();
 	
-	//square_text = to_string(count_square);
-	//strip_text = to_string(count_strip);
-	//tri_text = to_string(count_triangle);
-	//circle_text = to_string(count_circle);
+	ss.str("");
+	ss << count_triangle;
+	tri_text = ss.str();
+
+	ss.str("");
+	ss << count_circle;
+	circle_text = ss.str();
 	
 	putText(Original, strip_text, Point(strip_x_text, strip_y_text), FONT_HERSHEY_DUPLEX, 2, Scalar(0,255,255), 2);
 	putText(Original, circle_text, Point(circle_x_text, circle_y_text), FONT_HERSHEY_DUPLEX, 2, Scalar(0,255,255), 2);
@@ -155,6 +169,7 @@ void secondMissionProcessing(Mat input_image){
 	//imshow("second colour", Threshold);
 	//imshow("second contour", BW);
 	imshow("second", Original);
+	imshow("thresh", Threshold);
 }
 
 void thirdMissionProcessing(Mat input_image){

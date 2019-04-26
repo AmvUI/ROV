@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/video_mini.dir/src/video_mini.cpp.o"
-  "/home/mfikih15/Documents/ROV/devel/lib/gabut/video_mini.pdb"
-  "/home/mfikih15/Documents/ROV/devel/lib/gabut/video_mini"
+  "/home/nathan/ROV/devel/lib/gabut/video_mini.pdb"
+  "/home/nathan/ROV/devel/lib/gabut/video_mini"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/mfikih15/Documents/ROV/src/gabut/include/gabut/hoho.hpp
+/home/nathan/ROV/src/gabut/include/gabut/hoho.hpp
 iostream
 -
 stdio.h
@@ -16,9 +16,9 @@ string.h
 cstdlib
 -
 
-/home/mfikih15/Documents/ROV/src/gabut/src/video_mini.cpp
+/home/nathan/ROV/src/gabut/src/video_mini.cpp
 ../include/gabut/hoho.hpp
-/home/mfikih15/Documents/ROV/src/gabut/include/gabut/hoho.hpp
+/home/nathan/ROV/src/gabut/include/gabut/hoho.hpp
 ros/ros.h
 -
 image_transport/image_transport.h

@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/mfikih15/Documents/ROV/devel/include/gabut/number_rc.h
+/home/nathan/ROV/devel/include/gabut/number_rc.h
 string
 -
 vector
@@ -22,7 +22,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/mfikih15/Documents/ROV/src/gabut/include/gabut/hoho.hpp
+/home/nathan/ROV/src/gabut/include/gabut/hoho.hpp
 iostream
 -
 stdio.h
@@ -32,9 +32,9 @@ string.h
 cstdlib
 -
 
-/home/mfikih15/Documents/ROV/src/gabut/src/rov_remote.cpp
+/home/nathan/ROV/src/gabut/src/rov_remote.cpp
 ../include/gabut/hoho.hpp
-/home/mfikih15/Documents/ROV/src/gabut/include/gabut/hoho.hpp
+/home/nathan/ROV/src/gabut/include/gabut/hoho.hpp
 ros/ros.h
 -
 sensor_msgs/Joy.h
@@ -44,7 +44,7 @@ iostream
 stdio.h
 -
 gabut/number_rc.h
-/home/mfikih15/Documents/ROV/src/gabut/src/gabut/number_rc.h
+/home/nathan/ROV/src/gabut/src/gabut/number_rc.h
 
 /opt/ros/kinetic/include/ros/advertise_options.h
 ros/forwards.h

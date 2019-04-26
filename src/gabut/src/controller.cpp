@@ -162,24 +162,24 @@ void joyCallback(const sensor_msgs::Joy::ConstPtr& joy){
 		
 		
 		if (grip_high > 0){
-			//rovRcIn.channels[SERVO] = pwmServo + 100;
-			pwmServo = pwmServo + change_servo;
-			tempPwm = pwmServo;
-			if(pwmServo > maxServo){pwmServo = maxServo;}
+			
+		rovRcIn.channels[SERVO1] = maxServo;
+		
+		rovRcIn.channels[SERVO2] = maxServo;
+		tempPwm=maxServo;
+		
 		}
 		else if(grip_low > 0){ 
 			//rovRcIn.channels[SERVO] = pwmServo - 100;
-			pwmServo = pwmServo - change_servo;
-			tempPwm = pwmServo;
-			if(pwmServo < minServo){pwmServo = minServo;}
+		
+		rovRcIn.channels[SERVO1] = minServo;
+		rovRcIn.channels[SERVO2] = minServo;
+		tempPwm=minServo;
 		}
 		else{
-			//rovRcIn.channels[SERVO] = pwmServo + 0;
-			pwmServo = pwmServo + 0;
+			rovRcIn.channels[SERVO1] = tempPwm;
+			rovRcIn.channels[SERVO2] = tempPwm;
 		}
-		
-		rovRcIn.channels[SERVO1] = pwmServo;
-		rovRcIn.channels[SERVO2] = pwmServo;
 		pub_override_rc.publish(rovRcIn);		
 	}	
 }

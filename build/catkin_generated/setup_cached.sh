@@ -7,4 +7,5 @@
 # new environment variables
 
 # modified environment variables
-export PWD="/home/mfikih15/Documents/ROV/build"
+export PWD="/home/nathan/ROV/build"
+export ROS_PACKAGE_PATH="/home/mfikih15/Documents/ROV/src:/home/nathan/ROV/src:/opt/ros/kinetic/share"
