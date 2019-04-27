@@ -136,6 +136,3 @@ int ph_x_value = 100;
 int ph_y_value = 50;
 int heat_x_value = 120;
 int heat_y_value = 100;
-
-string ph_text_value = "7.2";
-string heat_text_value = "30";

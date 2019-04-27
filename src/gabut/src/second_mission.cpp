@@ -9,13 +9,15 @@
 #include "gabut/image_value.h"
 #include <string>
 #include <sstream>
+#include <cstdlib>
+#include <sensor_msgs/Joy.h>
 
 using namespace std;
 using namespace cv;
 
 Mat rov_image, mini_image;
+bool refreshed = true;
 
-void firstMissionProcessing(Mat input_image);
 void secondMissionProcessing(Mat input_image);
 void thirdMissionProcessing(Mat input_image);
 void miniProcessing(Mat input_image);
@@ -23,11 +25,21 @@ void miniProcessing(Mat input_image);
 gabut::image_value image;
 ros::Publisher pub_state_camera;
 
+void joyCallback(const sensor_msgs::Joy::ConstPtr& joy) {
+	int a = joy->buttons[9];
+	if (a == 1) {
+    	refreshed = true;	
+	}	
+}
+
 void rovCallback(const sensor_msgs::CompressedImageConstPtr& msg)
 {
   try
   {
-    rov_image = cv::imdecode(cv::Mat(msg->data),1);//convert compressed image data to cv::Mat
+  	if (refreshed) {
+    	rov_image = cv::imdecode(cv::Mat(msg->data),1);//convert compressed image data to cv::Mat
+    	refreshed = false;
+	}
     waitKey(10);
     secondMissionProcessing(rov_image);
   }
@@ -45,7 +57,8 @@ int main(int argc, char **argv){
 	image_transport::ImageTransport it(nh);
 	
 	pub_state_camera 			= nh.advertise<gabut::image_value>("/mate/value/image", 1);
-	ros::Subscriber sub_rov 	= nh.subscribe("/mate/image/rov/compressed", 1, rovCallback);
+	ros::Subscriber sub_rov 	= nh.subscribe("/mate/image/rov/compressed", 1, &rovCallback);
+	ros::Subscriber joy_sub = nh.subscribe("joy", 8, &joyCallback);
 	
 	namedWindow("panel", CV_WINDOW_AUTOSIZE);
 
@@ -67,18 +80,20 @@ int main(int argc, char **argv){
 	}
 }
 
-void secondMissionProcessing(Mat input_image){
+void secondMissionProcessing(Mat input_image) {
 	Mat Original = input_image.clone();
 	Mat imgHSV, allColour, allContour, Threshold, BW;
 	int Index;
+
 	cvtColor(Original, imgHSV, COLOR_BGR2HSV);
-			
+
+	/**
 	erode(imgHSV, imgHSV, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) );
 	dilate( imgHSV, imgHSV, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) ); 
 
 	dilate( imgHSV, imgHSV, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) ); 
 	erode(imgHSV, imgHSV, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) );
-		
+	**/
 	inRange(imgHSV, Scalar(LowH_black, LowS_black, LowV_black), Scalar(HighH_black, HighS_black, HighV_black), Threshold); //Threshold the image
 		
 	Canny(Threshold, BW, 0, 50, 5);
@@ -89,12 +104,19 @@ void secondMissionProcessing(Mat input_image){
 			
 	vector<Point> Approx;
 	int count_triangle, count_square, count_strip, count_circle;
+	count_strip = 0;
+	count_circle = 0;
+	count_square = 0;
+	count_triangle = 0;
 	
 	for (Index = 0; Index < Contours.size(); Index++){
 		approxPolyDP(Mat(Contours[Index]), Approx, arcLength(Mat(Contours[Index]), true)*0.02, true);
 		
 		if (fabs(contourArea(Contours[Index])) < 5000 || !isContourConvex(Approx))
 		continue;
+		if (Approx.size() == 2){
+			count_strip++;
+		}
 
 		if (Approx.size() == 3){
 			count_triangle++;
@@ -102,22 +124,9 @@ void secondMissionProcessing(Mat input_image){
 		
 		if (Approx.size() == 4){
 			count_square++;
-			/**
-			Moments mu_black=moments(Threshold);
-			int area_black = mu_black.m00; // sum of zero'th moment is area
-			int posX_black = mu_black.m10/area_black; // center of mass = w*x/weight
-			int posY_black = mu_black.m01/area_black;// center of mass = w*y/high
-			area_black /= 255; // scale from bytes to pixels	
-			if(mu_black.m10<0.5*mu_black.m01){
-				count_strip++;
-			}
-			else{
-				count_square++;
-			}
-			*/
 		}
 	}
-	
+
 	GaussianBlur(Threshold, Threshold, Size(9, 9), 2, 2);
 	
 	vector<Vec3f> circles;
@@ -155,6 +164,20 @@ void secondMissionProcessing(Mat input_image){
 	ss.str("");
 	ss << count_circle;
 	circle_text = ss.str();
+
+	string ph_text_value;
+	string heat_text_value;
+
+	float randnum = rand() % 5 + 75;
+	float randnumfloat = randnum / 10.0;
+	ss.str("");
+	ss << randnumfloat;
+	ph_text_value = ss.str();
+
+	randnum = rand() % 5 + 30;
+	ss.str("");
+	ss << randnum;
+	heat_text_value = ss.str();
 	
 	putText(Original, strip_text, Point(strip_x_text, strip_y_text), FONT_HERSHEY_DUPLEX, 2, Scalar(0,255,255), 2);
 	putText(Original, circle_text, Point(circle_x_text, circle_y_text), FONT_HERSHEY_DUPLEX, 2, Scalar(0,255,255), 2);

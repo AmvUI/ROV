@@ -5,8 +5,8 @@
 
 ros::NodeHandle nh;
 
-int motor_1=6;
-int motor_2=7;
+int motor_1=8;
+int motor_2=9;
 
 Servo motor1;
 Servo motor2;  
@@ -31,26 +31,22 @@ void joyCb( const sensor_msgs::Joy& joy){
     n = joy.buttons[7];  //r2
 
     if(g>0){
-      motor1.write(180);
-      motor2.write(180);
-    }
-    else if(i>0){
-      motor1.write(180);
-      motor2.write(180);
+      motor1.write(70);
+      motor2.write(50);
     }
     else{
-      motor1.write(90);
-      motor2.write(90);
+      motor1.write(0);
+      motor2.write(0);
     }
     delay(100);
 
     if(j>0){
-      motor1.write(0);
-      motor2.write(180);
+      motor1.write(70);
+      motor2.write(0);
     }
     else if(h>0){
-      motor1.write(180);
-      motor2.write(0);
+      motor1.write(0);
+      motor2.write(50);
     }
     delay(100);
 }

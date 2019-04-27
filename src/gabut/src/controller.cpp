@@ -10,12 +10,14 @@
 #include "pid/plant_msg.h"
 #include "pid/controller_msg.h"
 #include "pid/pid_const_msg.h"
+#include <mavros_msgs/State.h>
 
 using namespace std;
 
 int a, b, c, d, e, f;
 int g, h, i, j, k, l, m, n, o, p, q;
 int throttle, steering, sink, grip_high, grip_low, trim, roll;
+int counter;
 
 int tempPwm;
 int mode;
@@ -38,6 +40,7 @@ void pid_receiver_cb(const pid::controller_msg& control);
 void joyCallback(const sensor_msgs::Joy::ConstPtr& joy);
 void control_cb (const gabut::number_rc& msg);
 void checkController();
+void armPixhawk(const mavros_msgs::State::ConstPtr& state);
 
 ros::Publisher pub_pid_in; 
 ros::Publisher pub_pid_const;
@@ -56,18 +59,11 @@ int main(int argc, char** argv){
 	ros::Subscriber joy_sub 			= nh.subscribe<sensor_msgs::Joy>("joy", 8, &joyCallback);
 	ros::Subscriber sub_mode_rc 		= nh.subscribe("/mate/rov/number", 1, &control_cb);
 	ros::ServiceClient client 			= nh.serviceClient<mavros_msgs::SetMode>("/mavros/set_mode");
-	
+	ros::Subscriber state = nh.subscribe<mavros_msgs::State>("/mavros/state", 8, &armPixhawk);
+
 	flight.request.base_mode = 0;
 	flight.request.custom_mode = "MANUAL";
 	client.call(flight);
-	
-	flight.request.base_mode = 0;
-	flight.request.custom_mode = "MANUAL";
-	client.call(flight);
-		
-	system("rosrun mavros mavsafety arm");
-	system("rosrun mavros mavsafety arm");
-	system("rosrun mavros mavsafety arm");
 		
 	pid_const.p = kp;
 	pid_const.i = ki;
@@ -79,6 +75,11 @@ int main(int argc, char** argv){
 	while( ros::ok() ){	
 		ros::spinOnce();
 		sleep(0.2);
+	}
+}
+void armPixhawk(const mavros_msgs::State::ConstPtr& state) {
+	if (!state->armed) {
+		system("rosrun mavros mavsafety arm");
 	}
 }
 
@@ -162,25 +163,39 @@ void joyCallback(const sensor_msgs::Joy::ConstPtr& joy){
 		
 		
 		if (grip_high > 0){
-			
-		rovRcIn.channels[SERVO1] = maxServo;
-		
-		rovRcIn.channels[SERVO2] = maxServo;
-		tempPwm=maxServo;
-		
-		}
-		else if(grip_low > 0){ 
-			//rovRcIn.channels[SERVO] = pwmServo - 100;
-		
-		rovRcIn.channels[SERVO1] = minServo;
-		rovRcIn.channels[SERVO2] = minServo;
-		tempPwm=minServo;
-		}
-		else{
+			counter++;
+			if (counter > 4) {
+				counter = 4;
+			}
+
+			tempPwm = counter * 200 + minServo;
+			if (tempPwm > maxServo) {
+				tempPwm = maxServo;
+			}
+
 			rovRcIn.channels[SERVO1] = tempPwm;
 			rovRcIn.channels[SERVO2] = tempPwm;
 		}
-		pub_override_rc.publish(rovRcIn);		
+		else if (grip_low > 0){
+			counter--;
+			if (counter < 0) {
+				counter = 0;
+			}
+
+			tempPwm = counter * 200 + minServo;
+			if (tempPwm < minServo) {
+				tempPwm = minServo;
+			}
+
+			rovRcIn.channels[SERVO1] = tempPwm;
+			rovRcIn.channels[SERVO2] = tempPwm;
+
+		} else {
+			rovRcIn.channels[SERVO1] = tempPwm;
+			rovRcIn.channels[SERVO2] = tempPwm;
+		}
+		
+		pub_override_rc.publish(rovRcIn);
 	}	
 }
 
