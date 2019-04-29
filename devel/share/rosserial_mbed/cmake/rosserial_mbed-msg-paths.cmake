@@ -1,4 +1,4 @@
 # generated from genmsg/cmake/pkg-msg-paths.cmake.develspace.in
 
-set(rosserial_mbed_MSG_INCLUDE_DIRS "/home/mfikih15/Documents/ROV/src/rosserial/rosserial_mbed/msg")
+set(rosserial_mbed_MSG_INCLUDE_DIRS "/home/ardanto14/ROV/src/rosserial/rosserial_mbed/msg")
 set(rosserial_mbed_MSG_DEPENDENCIES )

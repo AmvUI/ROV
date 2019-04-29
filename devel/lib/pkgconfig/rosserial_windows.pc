@@ -1,8 +1,8 @@
-prefix=/home/mfikih15/Documents/ROV/devel
+prefix=/home/ardanto14/ROV/devel
 
 Name: rosserial_windows
 Description: Description of rosserial_windows
 Version: 0.8.0
 Cflags: 
-Libs: -L/home/mfikih15/Documents/ROV/devel/lib 
+Libs: -L/home/ardanto14/ROV/devel/lib 
 Requires: 

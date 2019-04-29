@@ -1,7 +1,6 @@
 #include <ros.h>
 #include <Servo.h>
 #include <sensor_msgs/Joy.h>
-#include <ros.h>
 
 ros::NodeHandle nh;
 
@@ -31,32 +30,37 @@ void joyCb( const sensor_msgs::Joy& joy){
     n = joy.buttons[7];  //r2
 
     if(g>0){
-      motor1.write(70);
-      motor2.write(50);
+      Serial.println("GO");
+      motor1.write(40);
+      motor2.write(70);
     }
-    else{
+    else if (i >0){
+      Serial.println("NO");
       motor1.write(0);
       motor2.write(0);
     }
-    delay(100);
 
     if(j>0){
-      motor1.write(70);
+      
+      Serial.println("LEFT");
+      motor1.write(40);
       motor2.write(0);
     }
     else if(h>0){
+      
+      Serial.println("RIGHT");
       motor1.write(0);
-      motor2.write(50);
+      motor2.write(70);
     }
-    delay(100);
 }
 
 ros::Subscriber<sensor_msgs::Joy> sub("joy", &joyCb );
 
 void setup(){
+  Serial.begin(57600);
   nh.initNode();
   motor1.attach(motor_1); 
-  motor2.attach(motor_2);   
+    motor2.attach(motor_2);   
   nh.subscribe(sub);
 }
   

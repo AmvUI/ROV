@@ -163,29 +163,13 @@ void joyCallback(const sensor_msgs::Joy::ConstPtr& joy){
 		
 		
 		if (grip_high > 0){
-			counter++;
-			if (counter > 4) {
-				counter = 4;
-			}
-
-			tempPwm = counter * 200 + minServo;
-			if (tempPwm > maxServo) {
-				tempPwm = maxServo;
-			}
+			tempPwm = 1660;
 
 			rovRcIn.channels[SERVO1] = tempPwm;
 			rovRcIn.channels[SERVO2] = tempPwm;
 		}
 		else if (grip_low > 0){
-			counter--;
-			if (counter < 0) {
-				counter = 0;
-			}
-
-			tempPwm = counter * 200 + minServo;
-			if (tempPwm < minServo) {
-				tempPwm = minServo;
-			}
+			tempPwm = 1100;
 
 			rovRcIn.channels[SERVO1] = tempPwm;
 			rovRcIn.channels[SERVO2] = tempPwm;

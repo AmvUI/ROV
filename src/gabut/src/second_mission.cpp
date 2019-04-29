@@ -84,8 +84,9 @@ void secondMissionProcessing(Mat input_image) {
 	Mat Original = input_image.clone();
 	Mat imgHSV, allColour, allContour, Threshold, BW;
 	int Index;
+	imgHSV = Original;
 
-	cvtColor(Original, imgHSV, COLOR_BGR2HSV);
+	// cvtColor(Original, imgHSV, COLOR_BGR2HSV);
 
 	/**
 	erode(imgHSV, imgHSV, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)) );

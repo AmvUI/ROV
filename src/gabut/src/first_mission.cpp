@@ -28,7 +28,8 @@ void rovCallback(const sensor_msgs::CompressedImageConstPtr& msg)
   {
     rov_image = cv::imdecode(cv::Mat(msg->data),1);//convert compressed image data to cv::Mat
     waitKey(10);
-    firstMissionProcessing(rov_image);
+    // firstMissionProcessing(rov_image);
+    imshow("first", rov_image);
   }
   catch (cv_bridge::Exception& e)
   {

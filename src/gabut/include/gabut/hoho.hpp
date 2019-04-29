@@ -14,7 +14,7 @@ float delta_t = 0.01;
 float initial_time = 0; 
 
 int camera_rov = 0;
-int camera_mini = 1;
+int camera_mini = 2;
 
 #define STEERING_PIN 		0
 #define THROTTLE_PIN 		2
