@@ -35,9 +35,9 @@ def listener():
 
 if __name__ == '__main__':
     global ser
-    #try:
-    #	ser = serial.Serial('/dev/ttyUSB0', 9600)
-    #except:
-    #    ser = serial.Serial('/dev/ttyUSB1', 9600)
-    ser = serial.Serial('/dev/ttyUSB0', 9600)
+    try:
+    	ser = serial.Serial('/dev/ttyUSB0', 9600)
+    except:
+        ser = serial.Serial('/dev/ttyUSB1', 9600)
+    #ser = serial.Serial('/dev/ttyUSB0', 9600)
     listener()
