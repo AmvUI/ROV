@@ -165,27 +165,10 @@ ${catkin_LIBRARIES}
 ${OpenCV_LIBRARIES}
 )
 
-add_executable(video_mini src/video_mini.cpp )
-target_link_libraries(video_mini
-${catkin_LIBRARIES}
-${OpenCV_LIBRARIES}
-)
-
 add_executable(first_mission src/first_mission.cpp )
 target_link_libraries(first_mission
 ${catkin_LIBRARIES}
 ${OpenCV_LIBRARIES}
-)
-
-add_executable(second_mission src/second_mission.cpp )
-target_link_libraries(second_mission
-${catkin_LIBRARIES}
-${OpenCV_LIBRARIES}
-)
-
-add_executable(rov_remote src/rov_remote.cpp )
-target_link_libraries(rov_remote
-${catkin_LIBRARIES}
 )
 
 add_executable(controller src/controller.cpp )

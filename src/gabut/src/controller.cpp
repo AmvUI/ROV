@@ -20,7 +20,6 @@ int throttle, steering, sink, grip_high, grip_low, trim, roll;
 int counter;
 
 int tempPwm;
-int mode;
 
 bool lastArmed = false;
 
@@ -55,9 +54,7 @@ int main(int argc, char** argv){
 	pub_pid_const 	= nh.advertise<pid::pid_const_msg>("/mate/pid/const", 1,true);
 
 	ros::Subscriber sub_pid_x_out 		= nh.subscribe("/mate/pid/out", 10, pid_receiver_cb );
-	ros::Subscriber sub_image_process 	= nh.subscribe("/mate/value/image", 1, image_process_cb);
 	ros::Subscriber joy_sub 			= nh.subscribe<sensor_msgs::Joy>("joy", 8, &joyCallback);
-	ros::Subscriber sub_mode_rc 		= nh.subscribe("/mate/rov/number", 1, &control_cb);
 	ros::ServiceClient client 			= nh.serviceClient<mavros_msgs::SetMode>("/mavros/set_mode");
 	ros::Subscriber state = nh.subscribe<mavros_msgs::State>("/mavros/state", 8, &armPixhawk);
 
@@ -109,159 +106,76 @@ void joyCallback(const sensor_msgs::Joy::ConstPtr& joy){
 	grip_low 	= joy->buttons[7];
 	//checkController();
 	
-	if(mode==2){	
-		for(int i=0; i < 8; i++) rovRcIn.channels[i] = 0;	//Releases all Channels First
-		
-		//up 
-		if (sink > 0){
-			rovRcIn.channels[MOTOR1] = minStabil;
-			rovRcIn.channels[MOTOR2] = minMotor;
-			rovRcIn.channels[MOTOR3] = minMotor;
-		}
-		//down
-		else if (sink < 0){
-			rovRcIn.channels[MOTOR1] = maxStabil;
-			rovRcIn.channels[MOTOR2] = maxMotor;
-			rovRcIn.channels[MOTOR3] = maxMotor;
-		}
-		
-		else if (trim < 0){
-			rovRcIn.channels[MOTOR1] = minTrim;
-			rovRcIn.channels[MOTOR2] = maxTrim;
-			rovRcIn.channels[MOTOR3] = maxTrim;
-		}
-		else if (trim > 0){
-			rovRcIn.channels[MOTOR1] = maxTrim;
-			rovRcIn.channels[MOTOR2] = minTrim;
-			rovRcIn.channels[MOTOR3] = minTrim;
-		}
-		else if (roll < 0){//left
-			rovRcIn.channels[MOTOR1] = middleStabil;//middle
-			rovRcIn.channels[MOTOR2] = maxRoll;//right
-			rovRcIn.channels[MOTOR3] = minRoll;//left
-		}
-		else if (roll > 0){//right
-			rovRcIn.channels[MOTOR1] = middleStabil;
-			rovRcIn.channels[MOTOR2] = minRoll;
-			rovRcIn.channels[MOTOR3] = maxRoll;
-		}
-		else {
-			rovRcIn.channels[MOTOR1] = middleStabil;
-			rovRcIn.channels[MOTOR2] = middleMotor;
-			rovRcIn.channels[MOTOR3] = middleMotor;		
-		}
+	for(int i=0; i < 8; i++) rovRcIn.channels[i] = 0;	//Releases all Channels First
 	
-		//steering
-		if (steering < 0){rovRcIn.channels[STEERING_PIN] = maxSteering;}//right
-		else if (steering > 0){rovRcIn.channels[STEERING_PIN] = minSteering;}//left
-		else {rovRcIn.channels[STEERING_PIN] = middleSteering;}
-	
-		//throttle
-		if (throttle > 0){rovRcIn.channels[THROTTLE_PIN] = maxThrottle;}
-		else if (throttle < 0){rovRcIn.channels[THROTTLE_PIN] = minThrottle;}
-		else {rovRcIn.channels[THROTTLE_PIN] = middleThrottle;}
-		
-		
-		if (grip_high > 0){
-			tempPwm = 1660;
-
-			rovRcIn.channels[SERVO1] = tempPwm;
-			rovRcIn.channels[SERVO2] = tempPwm;
-		}
-		else if (grip_low > 0){
-			tempPwm = 1100;
-
-			rovRcIn.channels[SERVO1] = tempPwm;
-			rovRcIn.channels[SERVO2] = tempPwm;
-
-		} else {
-			rovRcIn.channels[SERVO1] = tempPwm;
-			rovRcIn.channels[SERVO2] = tempPwm;
-		}
-		
-		pub_override_rc.publish(rovRcIn);
-	}	
-}
-
-void image_process_cb(const gabut::image_value& image){
-	state_red 		= image.state_red;
-	state_blue 		= image.state_blue;
-	
-	if(mode==1){//mode auto	
-		for(int i=0; i < 8; i++) rovRcIn.channels[i] = 0;	//Releases all Channels First
-		
-		rovRcIn.channels[MOTOR1] = autoStabil;
-		rovRcIn.channels[MOTOR2] = autoMotor;
-		rovRcIn.channels[MOTOR3] = autoMotor;		
-		
-		rovRcIn.channels[SERVO1] = pwmServo;
-		rovRcIn.channels[SERVO2] = pwmServo;
-		
-		pid_in.x = state_red;
-		pid_in.t = pid_in.t+delta_t;
-		pid_in.setpoint = red_setpoint;
-		pub_pid_in.publish(pid_in);
-			
-		ros::spinOnce();
-		if(state_blue > 0){
-			mode==3;
-		}
-		
-		autoSteering = middleSteering - control_effort;
-		
-		if(state_red==0){rovRcIn.channels[STEERING_PIN] = middleSteering;}
-		else if(autoSteering >= maxSteering){rovRcIn.channels[STEERING_PIN] = maxSteering;}
-		else if(autoSteering <= minSteering){rovRcIn.channels[STEERING_PIN] = minSteering;}
-		else{rovRcIn.channels[STEERING_PIN] = autoSteering;}
-		
-		rovRcIn.channels[THROTTLE_PIN] = autoThrottle;
-		
-		//cout<<"1"<<endl;
-		pub_override_rc.publish(rovRcIn);		
+	//up 
+	if (sink > 0){
+		rovRcIn.channels[MOTOR1] = minStabil;
+		rovRcIn.channels[MOTOR2] = minMotor;
+		rovRcIn.channels[MOTOR3] = minMotor;
 	}
-	else if(mode==3){//mode blue	
-		for(int i=0; i < 8; i++) rovRcIn.channels[i] = 0;	//Releases all Channels First
-		
-		rovRcIn.channels[MOTOR1] = autoStabil;
-		rovRcIn.channels[MOTOR2] = autoMotor;
-		rovRcIn.channels[MOTOR3] = autoMotor;
-		
-		rovRcIn.channels[SERVO1] = pwmServo;
-		rovRcIn.channels[SERVO2] = pwmServo;
-		
-		//maju
-		rovRcIn.channels[STEERING_PIN] = middleSteering;
-		rovRcIn.channels[THROTTLE_PIN] = autoThrottle;
-		pub_override_rc.publish(rovRcIn);	
-		sleep(1);
-		
-		//kanan
-		rovRcIn.channels[STEERING_PIN] = maxSteering;
-		rovRcIn.channels[THROTTLE_PIN] = middleThrottle;
-		pub_override_rc.publish(rovRcIn);
-		sleep(1);
-		
-		//diam
-		rovRcIn.channels[STEERING_PIN] = middleSteering;
-		rovRcIn.channels[THROTTLE_PIN] = middleThrottle;
-		pub_override_rc.publish(rovRcIn);
-		sleep(5);
-		
-		//kiri
-		rovRcIn.channels[STEERING_PIN] = minSteering;
-		rovRcIn.channels[THROTTLE_PIN] = middleThrottle;
-		pub_override_rc.publish(rovRcIn);
-		sleep(1);
-		
-		//maju
-		rovRcIn.channels[STEERING_PIN] = middleSteering;
-		rovRcIn.channels[THROTTLE_PIN] = autoThrottle;
-		pub_override_rc.publish(rovRcIn);
-		sleep(1);
-		
-		mode == 2;
-		ros::spinOnce();			
-	}	
+	//down
+	else if (sink < 0){
+		rovRcIn.channels[MOTOR1] = maxStabil;
+		rovRcIn.channels[MOTOR2] = maxMotor;
+		rovRcIn.channels[MOTOR3] = maxMotor;
+	}
+	
+	else if (trim < 0){
+		rovRcIn.channels[MOTOR1] = minTrim;
+		rovRcIn.channels[MOTOR2] = maxTrim;
+		rovRcIn.channels[MOTOR3] = maxTrim;
+	}
+	else if (trim > 0){
+		rovRcIn.channels[MOTOR1] = maxTrim;
+		rovRcIn.channels[MOTOR2] = minTrim;
+		rovRcIn.channels[MOTOR3] = minTrim;
+	}
+	else if (roll < 0){//left
+		rovRcIn.channels[MOTOR1] = middleStabil;//middle
+		rovRcIn.channels[MOTOR2] = maxRoll;//right
+		rovRcIn.channels[MOTOR3] = minRoll;//left
+	}
+	else if (roll > 0){//right
+		rovRcIn.channels[MOTOR1] = middleStabil;
+		rovRcIn.channels[MOTOR2] = minRoll;
+		rovRcIn.channels[MOTOR3] = maxRoll;
+	}
+	else {
+		rovRcIn.channels[MOTOR1] = middleStabil;
+		rovRcIn.channels[MOTOR2] = middleMotor;
+		rovRcIn.channels[MOTOR3] = middleMotor;		
+	}
+
+	//steering
+	if (steering < 0){rovRcIn.channels[STEERING_PIN] = maxSteering;}//right
+	else if (steering > 0){rovRcIn.channels[STEERING_PIN] = minSteering;}//left
+	else {rovRcIn.channels[STEERING_PIN] = middleSteering;}
+
+	//throttle
+	if (throttle > 0){rovRcIn.channels[THROTTLE_PIN] = maxThrottle;}
+	else if (throttle < 0){rovRcIn.channels[THROTTLE_PIN] = minThrottle;}
+	else {rovRcIn.channels[THROTTLE_PIN] = middleThrottle;}
+	
+	
+	if (grip_high > 0){
+		tempPwm = 1660;
+
+		rovRcIn.channels[SERVO1] = tempPwm;
+		rovRcIn.channels[SERVO2] = tempPwm;
+	}
+	else if (grip_low > 0){
+		tempPwm = 1100;
+
+		rovRcIn.channels[SERVO1] = tempPwm;
+		rovRcIn.channels[SERVO2] = tempPwm;
+
+	} else {
+		rovRcIn.channels[SERVO1] = tempPwm;
+		rovRcIn.channels[SERVO2] = tempPwm;
+	}
+	
+	pub_override_rc.publish(rovRcIn);
 }
 
 void checkController(){	
@@ -269,10 +183,6 @@ void checkController(){
 	cout<<g<<"\t"<<h<<"\t"<<i<<"\t"<<j<<"\t"<<k<<"\t"<<l<<endl;
 	cout<<m<<"\t"<<n<<endl;
 	cout<<endl<<endl<<endl;
-}
-
-void control_cb (const gabut::number_rc& msg){
-	mode=msg.rc_number;
 }
 
 void pid_receiver_cb(const pid::controller_msg& control){
