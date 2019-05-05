@@ -159,17 +159,27 @@ void joyCallback(const sensor_msgs::Joy::ConstPtr& joy){
 	
 	
 	if (grip_high > 0){
-		tempPwm = 1660;
+		tempPwm = 1700;
 
 		rovRcIn.channels[SERVO1] = tempPwm;
 		rovRcIn.channels[SERVO2] = tempPwm;
 	}
 	else if (grip_low > 0){
-		tempPwm = 1100;
+		tempPwm = 1050;
 
 		rovRcIn.channels[SERVO1] = tempPwm;
 		rovRcIn.channels[SERVO2] = tempPwm;
 
+	} else if (m > 0) {
+		tempPwm = tempPwm + 200;
+		if (tempPwm > 1700) tempPwm = 1700;
+		rovRcIn.channels[SERVO1] = tempPwm;
+		rovRcIn.channels[SERVO2] = tempPwm;
+	} else if (k > 0) {
+		tempPwm = tempPwm - 200;
+		if (tempPwm < 1050) tempPwm = 1050;
+		rovRcIn.channels[SERVO1] = tempPwm;
+		rovRcIn.channels[SERVO2] = tempPwm;
 	} else {
 		rovRcIn.channels[SERVO1] = tempPwm;
 		rovRcIn.channels[SERVO2] = tempPwm;
